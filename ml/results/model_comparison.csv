@@ -1,0 +1,5 @@
+Model,Val_Macro_F1,Test_Macro_F1,Test_Weighted_F1,Test_High_Risk_Recall
+Logistic Regression (Balanced),0.5088,0.4225,0.7988,0.4886
+Random Forest (Balanced),0.5515,0.4734,0.9618,0.5052
+XGBoost (Weighted),0.534,0.4714,0.9577,0.5052
+HistGradientBoosting,0.4877,0.4776,0.9191,0.5207

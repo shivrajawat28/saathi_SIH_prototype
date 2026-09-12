@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: saathi_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: saathi_user
+      POSTGRES_PASSWORD: saathi_password
+      POSTGRES_DB: saathi_welfare
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U saathi_user -d saathi_welfare"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ..
+      dockerfile: backend/Dockerfile
+    container_name: saathi_backend
+    restart: always
+    environment:
+      - DATABASE_URL=postgresql://saathi_user:saathi_password@db:5432/saathi_welfare
+      - SECRET_KEY=saathi_production_super_secret_jwt_key_2026_sih_welfare
+      - ENVIRONMENT=production
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ../data:/app/data:ro
+      - ../ml:/app/ml:ro
+
+volumes:
+  postgres_data:

@@ -1,0 +1,196 @@
+{
+  "model_name": "Random Forest (Balanced)",
+  "evaluation_date": "2026-09-08 12:57:53",
+  "test_samples_count": 2940,
+  "overall_metrics": {
+    "macro_f1": 0.4734,
+    "weighted_f1": 0.9618,
+    "macro_precision": 0.5658,
+    "macro_recall": 0.5026,
+    "high_risk_priority_recall": 1.0,
+    "high_risk_priority_precision": 1.0
+  },
+  "confusion_matrix": [
+    [
+      2642,
+      0,
+      0,
+      0
+    ],
+    [
+      12,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      66
+    ],
+    [
+      0,
+      0,
+      1,
+      218
+    ]
+  ],
+  "per_class_metrics": {
+    "GREEN": {
+      "precision": 0.9954785229841748,
+      "recall": 1.0,
+      "f1-score": 0.9977341389728097,
+      "support": 2642.0
+    },
+    "YELLOW": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 12.0
+    },
+    "ORANGE": {
+      "precision": 0.5,
+      "recall": 0.014925373134328358,
+      "f1-score": 0.028985507246376812,
+      "support": 67.0
+    },
+    "RED": {
+      "precision": 0.7676056338028169,
+      "recall": 0.9954337899543378,
+      "f1-score": 0.8667992047713717,
+      "support": 219.0
+    },
+    "accuracy": 0.9731292517006803,
+    "macro avg": {
+      "precision": 0.565771039196748,
+      "recall": 0.5025897907721666,
+      "f1-score": 0.47337971274763957,
+      "support": 2940.0
+    },
+    "weighted avg": {
+      "precision": 0.9631496229683697,
+      "recall": 0.9731292517006803,
+      "f1-score": 0.961831513604286,
+      "support": 2940.0
+    }
+  },
+  "high_risk_tradeoff_analysis": {
+    "true_positives": 286,
+    "false_positives": 0,
+    "false_negatives": 0,
+    "true_negatives": 2654,
+    "interpretation": "A false positive triggers a supportive, non-punitive welfare review. A false negative risks delayed support for personnel in elevated strain. The model prioritizes high recall on elevated tiers."
+  },
+  "fairness_and_subgroup_audit": {
+    "department": {
+      "Human Resources": {
+        "sample_size": 126,
+        "macro_f1": 0.6078,
+        "accuracy": 0.9762,
+        "high_risk_recall": 0.7
+      },
+      "Research & Development": {
+        "sample_size": 1922,
+        "macro_f1": 0.4736,
+        "accuracy": 0.9714,
+        "high_risk_recall": 0.75
+      },
+      "Sales": {
+        "sample_size": 892,
+        "macro_f1": 0.4729,
+        "accuracy": 0.9765,
+        "high_risk_recall": 0.8095
+      }
+    },
+    "job_role": {
+      "Healthcare Representative": {
+        "sample_size": 262,
+        "macro_f1": 0.4669,
+        "accuracy": 0.9733,
+        "high_risk_recall": 0.7692
+      },
+      "Human Resources": {
+        "sample_size": 104,
+        "macro_f1": 0.6,
+        "accuracy": 0.9808,
+        "high_risk_recall": 0.6667
+      },
+      "Laboratory Technician": {
+        "sample_size": 518,
+        "macro_f1": 0.4563,
+        "accuracy": 0.9575,
+        "high_risk_recall": 0.7059
+      },
+      "Manager": {
+        "sample_size": 204,
+        "macro_f1": 0.4622,
+        "accuracy": 0.9608,
+        "high_risk_recall": 0.75
+      },
+      "Manufacturing Director": {
+        "sample_size": 290,
+        "macro_f1": 0.7333,
+        "accuracy": 0.9862,
+        "high_risk_recall": 0.7778
+      },
+      "Research Director": {
+        "sample_size": 160,
+        "macro_f1": 0.625,
+        "accuracy": 0.975,
+        "high_risk_recall": 0.7778
+      },
+      "Research Scientist": {
+        "sample_size": 584,
+        "macro_f1": 0.4667,
+        "accuracy": 0.9743,
+        "high_risk_recall": 0.7692
+      },
+      "Sales Executive": {
+        "sample_size": 652,
+        "macro_f1": 0.4754,
+        "accuracy": 0.9785,
+        "high_risk_recall": 0.8235
+      },
+      "Sales Representative": {
+        "sample_size": 166,
+        "macro_f1": 0.4714,
+        "accuracy": 0.9819,
+        "high_risk_recall": 0.8
+      }
+    },
+    "job_level": {
+      "1": {
+        "sample_size": 1086,
+        "macro_f1": 0.4614,
+        "accuracy": 0.9705,
+        "high_risk_recall": 0.7358
+      },
+      "2": {
+        "sample_size": 1068,
+        "macro_f1": 0.4861,
+        "accuracy": 0.9766,
+        "high_risk_recall": 0.7609
+      },
+      "3": {
+        "sample_size": 436,
+        "macro_f1": 0.4757,
+        "accuracy": 0.9748,
+        "high_risk_recall": 0.8269
+      },
+      "4": {
+        "sample_size": 212,
+        "macro_f1": 0.4629,
+        "accuracy": 0.9623,
+        "high_risk_recall": 0.75
+      },
+      "5": {
+        "sample_size": 138,
+        "macro_f1": 0.4763,
+        "accuracy": 0.9783,
+        "high_risk_recall": 0.8333
+      }
+    }
+  },
+  "ethical_disclaimer": "SAATHI is a decision-support system for authorized welfare officers. Outputs reflect operational and voluntary wellness patterns, not clinical diagnoses or disciplinary assessments."
+}

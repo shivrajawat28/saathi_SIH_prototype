@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #F4F6F4;
+    color: #10231B;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  ::selection {
+    background-color: #1B4D3E;
+    color: #FFFFFF;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: #10231B;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+  }
+}
+
+/* Custom Institutional Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #EAEFEA;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #B5C4BC;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8FA69B;
+}
+
+/* Subtle Tricolor Accent Gradient */
+.tricolor-stripe {
+  background: linear-gradient(90deg, #FF671F 0%, #FFFFFF 50%, #046A38 100%);
+  height: 3px;
+}
+
+.tricolor-stripe-subtle {
+  background: linear-gradient(90deg, #E65100 0%, #D5DFD8 50%, #1B4D3E 100%);
+  height: 2px;
+}
+
+/* Institutional Table Row Hover */
+.gov-table-row {
+  transition: background-color 0.15s ease;
+}
+.gov-table-row:hover {
+  background-color: #EBF3EE;
+}

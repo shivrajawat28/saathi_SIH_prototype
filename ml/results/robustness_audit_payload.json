@@ -1,0 +1,1168 @@
+{
+  "binary_benchmark": {
+    "Logistic Regression": {
+      "Precision": 0.8833,
+      "Recall": 0.979,
+      "F1": 0.9287,
+      "Specificity": 0.9861,
+      "FPR": 0.0139,
+      "FNR": 0.021,
+      "ROC_AUC": 0.9975,
+      "PR_AUC": 0.9898,
+      "Brier_Score": 0.0174,
+      "TP": 280,
+      "FP": 37,
+      "FN": 6,
+      "TN": 2617
+    },
+    "Random Forest": {
+      "Precision": 1.0,
+      "Recall": 1.0,
+      "F1": 1.0,
+      "Specificity": 1.0,
+      "FPR": 0.0,
+      "FNR": 0.0,
+      "ROC_AUC": 1.0,
+      "PR_AUC": 1.0,
+      "Brier_Score": 0.0138,
+      "TP": 286,
+      "FP": 0,
+      "FN": 0,
+      "TN": 2654
+    },
+    "XGBoost": {
+      "Precision": 1.0,
+      "Recall": 1.0,
+      "F1": 1.0,
+      "Specificity": 1.0,
+      "FPR": 0.0,
+      "FNR": 0.0,
+      "ROC_AUC": 1.0,
+      "PR_AUC": 1.0,
+      "Brier_Score": 0.0046,
+      "TP": 286,
+      "FP": 0,
+      "FN": 0,
+      "TN": 2654
+    },
+    "HistGradientBoosting": {
+      "Precision": 0.9931,
+      "Recall": 1.0,
+      "F1": 0.9965,
+      "Specificity": 0.9992,
+      "FPR": 0.0008,
+      "FNR": 0.0,
+      "ROC_AUC": 1.0,
+      "PR_AUC": 1.0,
+      "Brier_Score": 0.0061,
+      "TP": 286,
+      "FP": 2,
+      "FN": 0,
+      "TN": 2652
+    }
+  },
+  "rolling_origin_cross_validation": {
+    "Logistic Regression": {
+      "F1_Mean": 0.8411,
+      "F1_Std": 0.1373,
+      "Recall_Mean": 0.9725,
+      "Recall_Std": 0.0212,
+      "Precision_Mean": 0.7714,
+      "Precision_Std": 0.2108,
+      "PR_AUC_Mean": 0.8976,
+      "PR_AUC_Std": 0.164,
+      "fold_details": [
+        {
+          "fold": 1,
+          "train_months": "1..5",
+          "val_month": 6,
+          "f1": 0.930460333006856,
+          "recall": 0.9387351778656127,
+          "precision": 0.9223300970873787,
+          "pr_auc": 0.9701946529960426
+        },
+        {
+          "fold": 2,
+          "train_months": "1..6",
+          "val_month": 7,
+          "f1": 0.9488188976377953,
+          "recall": 0.9582504970178927,
+          "precision": 0.9395711500974658,
+          "pr_auc": 0.9833771179472572
+        },
+        {
+          "fold": 3,
+          "train_months": "1..7",
+          "val_month": 8,
+          "f1": 0.731995277449823,
+          "recall": 0.9935897435897436,
+          "precision": 0.5794392523364486,
+          "pr_auc": 0.9686525240176052
+        },
+        {
+          "fold": 4,
+          "train_months": "1..8",
+          "val_month": 9,
+          "f1": 0.6255506607929515,
+          "recall": 0.993006993006993,
+          "precision": 0.4565916398713826,
+          "pr_auc": 0.5703080719946435
+        },
+        {
+          "fold": 5,
+          "train_months": "1..9",
+          "val_month": 10,
+          "f1": 0.9688581314878892,
+          "recall": 0.9790209790209791,
+          "precision": 0.958904109589041,
+          "pr_auc": 0.9956342904552745
+        }
+      ]
+    },
+    "Random Forest": {
+      "F1_Mean": 0.7864,
+      "F1_Std": 0.1504,
+      "Recall_Mean": 0.9196,
+      "Recall_Std": 0.1189,
+      "Precision_Mean": 0.7169,
+      "Precision_Std": 0.2153,
+      "PR_AUC_Mean": 0.8844,
+      "PR_AUC_Std": 0.1433,
+      "fold_details": [
+        {
+          "fold": 1,
+          "train_months": "1..5",
+          "val_month": 6,
+          "f1": 0.6416819012797075,
+          "recall": 0.6936758893280632,
+          "precision": 0.5969387755102041,
+          "pr_auc": 0.8128505675099005
+        },
+        {
+          "fold": 2,
+          "train_months": "1..6",
+          "val_month": 7,
+          "f1": 0.9247967479674797,
+          "recall": 0.904572564612326,
+          "precision": 0.9459459459459459,
+          "pr_auc": 0.9788668607203133
+        },
+        {
+          "fold": 3,
+          "train_months": "1..7",
+          "val_month": 8,
+          "f1": 0.7367178276269185,
+          "recall": 1.0,
+          "precision": 0.5831775700934579,
+          "pr_auc": 0.9965177769265604
+        },
+        {
+          "fold": 4,
+          "train_months": "1..8",
+          "val_month": 9,
+          "f1": 0.6285714285714286,
+          "recall": 1.0,
+          "precision": 0.4583333333333333,
+          "pr_auc": 0.633947622538174
+        },
+        {
+          "fold": 5,
+          "train_months": "1..9",
+          "val_month": 10,
+          "f1": 1.0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "pr_auc": 0.9999999999999999
+        }
+      ]
+    },
+    "XGBoost": {
+      "F1_Mean": 0.7938,
+      "F1_Std": 0.1207,
+      "Recall_Mean": 0.9663,
+      "Recall_Std": 0.0417,
+      "Precision_Mean": 0.6934,
+      "Precision_Std": 0.1799,
+      "PR_AUC_Mean": 0.8849,
+      "PR_AUC_Std": 0.1145,
+      "fold_details": [
+        {
+          "fold": 1,
+          "train_months": "1..5",
+          "val_month": 6,
+          "f1": 0.7741935483870968,
+          "recall": 0.924901185770751,
+          "precision": 0.6657183499288762,
+          "pr_auc": 0.7746138529467189
+        },
+        {
+          "fold": 2,
+          "train_months": "1..6",
+          "val_month": 7,
+          "f1": 0.8179372197309417,
+          "recall": 0.9065606361829026,
+          "precision": 0.7450980392156863,
+          "pr_auc": 0.928474528592664
+        },
+        {
+          "fold": 3,
+          "train_months": "1..7",
+          "val_month": 8,
+          "f1": 0.7482014388489209,
+          "recall": 1.0,
+          "precision": 0.5977011494252874,
+          "pr_auc": 0.9969617133478833
+        },
+        {
+          "fold": 4,
+          "train_months": "1..8",
+          "val_month": 9,
+          "f1": 0.6285714285714286,
+          "recall": 1.0,
+          "precision": 0.4583333333333333,
+          "pr_auc": 0.7245712982984952
+        },
+        {
+          "fold": 5,
+          "train_months": "1..9",
+          "val_month": 10,
+          "f1": 1.0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "pr_auc": 0.9999999999999999
+        }
+      ]
+    },
+    "HistGradientBoosting": {
+      "F1_Mean": 0.7757,
+      "F1_Std": 0.1253,
+      "Recall_Mean": 0.9275,
+      "Recall_Std": 0.0903,
+      "Precision_Mean": 0.6892,
+      "Precision_Std": 0.1826,
+      "PR_AUC_Mean": 0.8893,
+      "PR_AUC_Std": 0.1127,
+      "fold_details": [
+        {
+          "fold": 1,
+          "train_months": "1..5",
+          "val_month": 6,
+          "f1": 0.704126426690079,
+          "recall": 0.7924901185770751,
+          "precision": 0.6334913112164297,
+          "pr_auc": 0.7582281132350042
+        },
+        {
+          "fold": 2,
+          "train_months": "1..6",
+          "val_month": 7,
+          "f1": 0.7996237064910631,
+          "recall": 0.8449304174950298,
+          "precision": 0.7589285714285714,
+          "pr_auc": 0.9424889648379369
+        },
+        {
+          "fold": 3,
+          "train_months": "1..7",
+          "val_month": 8,
+          "f1": 0.7464114832535885,
+          "recall": 1.0,
+          "precision": 0.5954198473282443,
+          "pr_auc": 0.9968339084542839
+        },
+        {
+          "fold": 4,
+          "train_months": "1..8",
+          "val_month": 9,
+          "f1": 0.6285714285714286,
+          "recall": 1.0,
+          "precision": 0.4583333333333333,
+          "pr_auc": 0.7488815106715239
+        },
+        {
+          "fold": 5,
+          "train_months": "1..9",
+          "val_month": 10,
+          "f1": 1.0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "pr_auc": 0.9999999999999999
+        }
+      ]
+    }
+  },
+  "calibration": {
+    "rf_raw_brier": 0.0138,
+    "rf_calibrated_brier": 0.012,
+    "raw_curve": {
+      "pred": [
+        0.03684620840039215,
+        0.18199504233697736,
+        0.27649995665429167,
+        0.8557977959587076,
+        0.9676713316152875
+      ],
+      "true": [
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ]
+    },
+    "calibrated_curve": {
+      "pred": [
+        4.7232339718740556e-05,
+        0.22322207664076804,
+        0.3373413757265632,
+        0.43434799547640857,
+        0.5721689390512608,
+        0.6947772203763806,
+        0.7777142468809208
+      ],
+      "true": [
+        0.0003766478342749529,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "top_permutation_features": [
+    {
+      "feature": "leave_type_Recovery",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "self_reported_strain",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "dep_hardship",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "took_leave",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "leave_duration_days",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "days_since_prev_leave",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "sleep_quality",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "fatigue_level",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "work_stress",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "mood_wellbeing",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "work_life_balance",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "job_satisfaction",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "recovery_quality",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "attendance_change",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "dep_duration_days",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "leave_frequency_change",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "workload_change",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "sleep_change",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "routine_deviation",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "performance_change",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    }
+  ],
+  "sample_personnel_timelines": {
+    "P-000001": [
+      {
+        "month_idx": 1,
+        "date": "2025-01-01",
+        "duty_hours": 187.9,
+        "duty_hours_baseline_mean": 188.77,
+        "duty_pct_change": -0.46,
+        "night_shifts": 3,
+        "night_shifts_baseline_mean": 3.22,
+        "workload_score": 26.3,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 2,
+        "date": "2025-02-01",
+        "duty_hours": 196.6,
+        "duty_hours_baseline_mean": 187.9,
+        "duty_pct_change": 4.63,
+        "night_shifts": 4,
+        "night_shifts_baseline_mean": 3.0,
+        "workload_score": 32.4,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 3,
+        "date": "2025-03-01",
+        "duty_hours": 182.1,
+        "duty_hours_baseline_mean": 192.25,
+        "duty_pct_change": -5.28,
+        "night_shifts": 1,
+        "night_shifts_baseline_mean": 3.5,
+        "workload_score": 18.0,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 4,
+        "date": "2025-04-01",
+        "duty_hours": 186.0,
+        "duty_hours_baseline_mean": 188.87,
+        "duty_pct_change": -1.52,
+        "night_shifts": 0,
+        "night_shifts_baseline_mean": 2.67,
+        "workload_score": 19.9,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 5,
+        "date": "2025-05-01",
+        "duty_hours": 186.3,
+        "duty_hours_baseline_mean": 188.15,
+        "duty_pct_change": -0.98,
+        "night_shifts": 1,
+        "night_shifts_baseline_mean": 2.0,
+        "workload_score": 22.4,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 6,
+        "date": "2025-06-01",
+        "duty_hours": 181.6,
+        "duty_hours_baseline_mean": 187.75,
+        "duty_pct_change": -3.28,
+        "night_shifts": 2,
+        "night_shifts_baseline_mean": 1.5,
+        "workload_score": 25.9,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 7,
+        "date": "2025-07-01",
+        "duty_hours": 183.2,
+        "duty_hours_baseline_mean": 184.0,
+        "duty_pct_change": -0.43,
+        "night_shifts": 2,
+        "night_shifts_baseline_mean": 1.0,
+        "workload_score": 22.4,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 8,
+        "date": "2025-08-01",
+        "duty_hours": 189.3,
+        "duty_hours_baseline_mean": 184.27,
+        "duty_pct_change": 2.73,
+        "night_shifts": 3,
+        "night_shifts_baseline_mean": 1.25,
+        "workload_score": 25.4,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 9,
+        "date": "2025-09-01",
+        "duty_hours": 186.1,
+        "duty_hours_baseline_mean": 185.1,
+        "duty_pct_change": 0.54,
+        "night_shifts": 4,
+        "night_shifts_baseline_mean": 2.0,
+        "workload_score": 25.0,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 10,
+        "date": "2025-10-01",
+        "duty_hours": 184.0,
+        "duty_hours_baseline_mean": 185.05,
+        "duty_pct_change": -0.57,
+        "night_shifts": 2,
+        "night_shifts_baseline_mean": 2.75,
+        "workload_score": 23.7,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 11,
+        "date": "2025-11-01",
+        "duty_hours": 186.5,
+        "duty_hours_baseline_mean": 185.65,
+        "duty_pct_change": 0.46,
+        "night_shifts": 0,
+        "night_shifts_baseline_mean": 2.75,
+        "workload_score": 21.4,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 12,
+        "date": "2025-12-01",
+        "duty_hours": 173.9,
+        "duty_hours_baseline_mean": 186.48,
+        "duty_pct_change": -6.74,
+        "night_shifts": 0,
+        "night_shifts_baseline_mean": 2.25,
+        "workload_score": 17.0,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "N/A"
+      }
+    ],
+    "P-000015": [
+      {
+        "month_idx": 1,
+        "date": "2025-01-01",
+        "duty_hours": 183.2,
+        "duty_hours_baseline_mean": 188.77,
+        "duty_pct_change": -2.95,
+        "night_shifts": 2,
+        "night_shifts_baseline_mean": 3.22,
+        "workload_score": 20.8,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 2,
+        "date": "2025-02-01",
+        "duty_hours": 181.5,
+        "duty_hours_baseline_mean": 183.2,
+        "duty_pct_change": -0.93,
+        "night_shifts": 3,
+        "night_shifts_baseline_mean": 2.0,
+        "workload_score": 22.8,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 3,
+        "date": "2025-03-01",
+        "duty_hours": 194.7,
+        "duty_hours_baseline_mean": 182.35,
+        "duty_pct_change": 6.77,
+        "night_shifts": 4,
+        "night_shifts_baseline_mean": 2.5,
+        "workload_score": 31.0,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 4,
+        "date": "2025-04-01",
+        "duty_hours": 179.2,
+        "duty_hours_baseline_mean": 186.47,
+        "duty_pct_change": -3.9,
+        "night_shifts": 1,
+        "night_shifts_baseline_mean": 3.0,
+        "workload_score": 21.2,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 5,
+        "date": "2025-05-01",
+        "duty_hours": 180.4,
+        "duty_hours_baseline_mean": 184.65,
+        "duty_pct_change": -2.3,
+        "night_shifts": 1,
+        "night_shifts_baseline_mean": 2.5,
+        "workload_score": 20.9,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 6,
+        "date": "2025-06-01",
+        "duty_hours": 183.7,
+        "duty_hours_baseline_mean": 183.95,
+        "duty_pct_change": -0.14,
+        "night_shifts": 4,
+        "night_shifts_baseline_mean": 2.25,
+        "workload_score": 27.5,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 7,
+        "date": "2025-07-01",
+        "duty_hours": 192.6,
+        "duty_hours_baseline_mean": 184.5,
+        "duty_pct_change": 4.39,
+        "night_shifts": 3,
+        "night_shifts_baseline_mean": 2.5,
+        "workload_score": 29.4,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 8,
+        "date": "2025-08-01",
+        "duty_hours": 184.7,
+        "duty_hours_baseline_mean": 183.98,
+        "duty_pct_change": 0.39,
+        "night_shifts": 1,
+        "night_shifts_baseline_mean": 2.25,
+        "workload_score": 21.6,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 9,
+        "date": "2025-09-01",
+        "duty_hours": 180.3,
+        "duty_hours_baseline_mean": 185.35,
+        "duty_pct_change": -2.72,
+        "night_shifts": 1,
+        "night_shifts_baseline_mean": 2.25,
+        "workload_score": 19.6,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 10,
+        "date": "2025-10-01",
+        "duty_hours": 185.3,
+        "duty_hours_baseline_mean": 185.32,
+        "duty_pct_change": -0.01,
+        "night_shifts": 1,
+        "night_shifts_baseline_mean": 2.25,
+        "workload_score": 25.4,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 11,
+        "date": "2025-11-01",
+        "duty_hours": 191.5,
+        "duty_hours_baseline_mean": 185.73,
+        "duty_pct_change": 3.11,
+        "night_shifts": 1,
+        "night_shifts_baseline_mean": 1.5,
+        "workload_score": 23.1,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 12,
+        "date": "2025-12-01",
+        "duty_hours": 180.4,
+        "duty_hours_baseline_mean": 185.45,
+        "duty_pct_change": -2.72,
+        "night_shifts": 1,
+        "night_shifts_baseline_mean": 1.0,
+        "workload_score": 23.5,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "N/A"
+      }
+    ],
+    "P-000042": [
+      {
+        "month_idx": 1,
+        "date": "2025-01-01",
+        "duty_hours": 180.5,
+        "duty_hours_baseline_mean": 188.77,
+        "duty_pct_change": -4.38,
+        "night_shifts": 1,
+        "night_shifts_baseline_mean": 3.22,
+        "workload_score": 19.2,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 2,
+        "date": "2025-02-01",
+        "duty_hours": 185.9,
+        "duty_hours_baseline_mean": 180.5,
+        "duty_pct_change": 2.99,
+        "night_shifts": 2,
+        "night_shifts_baseline_mean": 1.0,
+        "workload_score": 21.3,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 3,
+        "date": "2025-03-01",
+        "duty_hours": 182.1,
+        "duty_hours_baseline_mean": 183.2,
+        "duty_pct_change": -0.6,
+        "night_shifts": 3,
+        "night_shifts_baseline_mean": 1.5,
+        "workload_score": 21.4,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 4,
+        "date": "2025-04-01",
+        "duty_hours": 189.5,
+        "duty_hours_baseline_mean": 182.83,
+        "duty_pct_change": 3.65,
+        "night_shifts": 1,
+        "night_shifts_baseline_mean": 2.0,
+        "workload_score": 25.5,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 5,
+        "date": "2025-05-01",
+        "duty_hours": 178.8,
+        "duty_hours_baseline_mean": 184.5,
+        "duty_pct_change": -3.09,
+        "night_shifts": 4,
+        "night_shifts_baseline_mean": 1.75,
+        "workload_score": 25.6,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 6,
+        "date": "2025-06-01",
+        "duty_hours": 182.0,
+        "duty_hours_baseline_mean": 184.08,
+        "duty_pct_change": -1.13,
+        "night_shifts": 0,
+        "night_shifts_baseline_mean": 2.5,
+        "workload_score": 22.7,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 7,
+        "date": "2025-07-01",
+        "duty_hours": 182.6,
+        "duty_hours_baseline_mean": 183.1,
+        "duty_pct_change": -0.27,
+        "night_shifts": 2,
+        "night_shifts_baseline_mean": 2.0,
+        "workload_score": 25.8,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 8,
+        "date": "2025-08-01",
+        "duty_hours": 177.6,
+        "duty_hours_baseline_mean": 183.22,
+        "duty_pct_change": -3.07,
+        "night_shifts": 1,
+        "night_shifts_baseline_mean": 1.75,
+        "workload_score": 21.6,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 9,
+        "date": "2025-09-01",
+        "duty_hours": 183.8,
+        "duty_hours_baseline_mean": 180.25,
+        "duty_pct_change": 1.97,
+        "night_shifts": 4,
+        "night_shifts_baseline_mean": 1.75,
+        "workload_score": 25.7,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 10,
+        "date": "2025-10-01",
+        "duty_hours": 183.8,
+        "duty_hours_baseline_mean": 181.5,
+        "duty_pct_change": 1.27,
+        "night_shifts": 2,
+        "night_shifts_baseline_mean": 1.75,
+        "workload_score": 25.0,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 11,
+        "date": "2025-11-01",
+        "duty_hours": 184.5,
+        "duty_hours_baseline_mean": 181.95,
+        "duty_pct_change": 1.4,
+        "night_shifts": 3,
+        "night_shifts_baseline_mean": 2.25,
+        "workload_score": 24.7,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 12,
+        "date": "2025-12-01",
+        "duty_hours": 181.6,
+        "duty_hours_baseline_mean": 182.42,
+        "duty_pct_change": -0.45,
+        "night_shifts": 2,
+        "night_shifts_baseline_mean": 2.5,
+        "workload_score": 25.6,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "N/A"
+      }
+    ],
+    "P-000100": [
+      {
+        "month_idx": 1,
+        "date": "2025-01-01",
+        "duty_hours": 174.7,
+        "duty_hours_baseline_mean": 188.77,
+        "duty_pct_change": -7.45,
+        "night_shifts": 4,
+        "night_shifts_baseline_mean": 3.22,
+        "workload_score": 25.3,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 2,
+        "date": "2025-02-01",
+        "duty_hours": 181.0,
+        "duty_hours_baseline_mean": 174.7,
+        "duty_pct_change": 3.61,
+        "night_shifts": 2,
+        "night_shifts_baseline_mean": 4.0,
+        "workload_score": 21.6,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 3,
+        "date": "2025-03-01",
+        "duty_hours": 181.6,
+        "duty_hours_baseline_mean": 177.85,
+        "duty_pct_change": 2.11,
+        "night_shifts": 2,
+        "night_shifts_baseline_mean": 3.0,
+        "workload_score": 23.0,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 4,
+        "date": "2025-04-01",
+        "duty_hours": 179.0,
+        "duty_hours_baseline_mean": 179.1,
+        "duty_pct_change": -0.06,
+        "night_shifts": 0,
+        "night_shifts_baseline_mean": 2.67,
+        "workload_score": 20.2,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 5,
+        "date": "2025-05-01",
+        "duty_hours": 178.7,
+        "duty_hours_baseline_mean": 179.08,
+        "duty_pct_change": -0.21,
+        "night_shifts": 3,
+        "night_shifts_baseline_mean": 2.0,
+        "workload_score": 23.2,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 6,
+        "date": "2025-06-01",
+        "duty_hours": 169.7,
+        "duty_hours_baseline_mean": 180.08,
+        "duty_pct_change": -5.76,
+        "night_shifts": 2,
+        "night_shifts_baseline_mean": 1.75,
+        "workload_score": 20.4,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 7,
+        "date": "2025-07-01",
+        "duty_hours": 182.9,
+        "duty_hours_baseline_mean": 177.25,
+        "duty_pct_change": 3.19,
+        "night_shifts": 2,
+        "night_shifts_baseline_mean": 1.75,
+        "workload_score": 24.4,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 8,
+        "date": "2025-08-01",
+        "duty_hours": 186.8,
+        "duty_hours_baseline_mean": 177.58,
+        "duty_pct_change": 5.19,
+        "night_shifts": 3,
+        "night_shifts_baseline_mean": 1.75,
+        "workload_score": 25.7,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 9,
+        "date": "2025-09-01",
+        "duty_hours": 182.1,
+        "duty_hours_baseline_mean": 179.52,
+        "duty_pct_change": 1.43,
+        "night_shifts": 2,
+        "night_shifts_baseline_mean": 2.5,
+        "workload_score": 23.7,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 10,
+        "date": "2025-10-01",
+        "duty_hours": 174.0,
+        "duty_hours_baseline_mean": 180.38,
+        "duty_pct_change": -3.53,
+        "night_shifts": 0,
+        "night_shifts_baseline_mean": 2.25,
+        "workload_score": 13.5,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 11,
+        "date": "2025-11-01",
+        "duty_hours": 182.0,
+        "duty_hours_baseline_mean": 181.45,
+        "duty_pct_change": 0.3,
+        "night_shifts": 0,
+        "night_shifts_baseline_mean": 1.75,
+        "workload_score": 21.4,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "GREEN"
+      },
+      {
+        "month_idx": 12,
+        "date": "2025-12-01",
+        "duty_hours": 176.9,
+        "duty_hours_baseline_mean": 181.23,
+        "duty_pct_change": -2.39,
+        "night_shifts": 3,
+        "night_shifts_baseline_mean": 1.25,
+        "workload_score": 23.2,
+        "period_support_priority": "GREEN",
+        "target_support_priority_next_month": "N/A"
+      }
+    ],
+    "P-000250": [
+      {
+        "month_idx": 1,
+        "date": "2025-01-01",
+        "duty_hours": 185.1,
+        "duty_hours_baseline_mean": 188.77,
+        "duty_pct_change": -1.94,
+        "night_shifts": 5,
+        "night_shifts_baseline_mean": 3.22,
+        "workload_score": 38.9,
+        "period_support_priority": "YELLOW",
+        "target_support_priority_next_month": "YELLOW"
+      },
+      {
+        "month_idx": 2,
+        "date": "2025-02-01",
+        "duty_hours": 183.2,
+        "duty_hours_baseline_mean": 185.1,
+        "duty_pct_change": -1.03,
+        "night_shifts": 3,
+        "night_shifts_baseline_mean": 5.0,
+        "workload_score": 33.6,
+        "period_support_priority": "YELLOW",
+        "target_support_priority_next_month": "YELLOW"
+      },
+      {
+        "month_idx": 3,
+        "date": "2025-03-01",
+        "duty_hours": 171.0,
+        "duty_hours_baseline_mean": 184.15,
+        "duty_pct_change": -7.14,
+        "night_shifts": 4,
+        "night_shifts_baseline_mean": 4.0,
+        "workload_score": 30.6,
+        "period_support_priority": "YELLOW",
+        "target_support_priority_next_month": "RED"
+      },
+      {
+        "month_idx": 4,
+        "date": "2025-04-01",
+        "duty_hours": 229.9,
+        "duty_hours_baseline_mean": 179.77,
+        "duty_pct_change": 27.89,
+        "night_shifts": 5,
+        "night_shifts_baseline_mean": 4.0,
+        "workload_score": 81.3,
+        "period_support_priority": "RED",
+        "target_support_priority_next_month": "RED"
+      },
+      {
+        "month_idx": 5,
+        "date": "2025-05-01",
+        "duty_hours": 221.5,
+        "duty_hours_baseline_mean": 192.3,
+        "duty_pct_change": 15.18,
+        "night_shifts": 10,
+        "night_shifts_baseline_mean": 4.25,
+        "workload_score": 87.2,
+        "period_support_priority": "RED",
+        "target_support_priority_next_month": "RED"
+      },
+      {
+        "month_idx": 6,
+        "date": "2025-06-01",
+        "duty_hours": 231.0,
+        "duty_hours_baseline_mean": 201.4,
+        "duty_pct_change": 14.7,
+        "night_shifts": 13,
+        "night_shifts_baseline_mean": 5.5,
+        "workload_score": 97.8,
+        "period_support_priority": "RED",
+        "target_support_priority_next_month": "RED"
+      },
+      {
+        "month_idx": 7,
+        "date": "2025-07-01",
+        "duty_hours": 243.7,
+        "duty_hours_baseline_mean": 213.35,
+        "duty_pct_change": 14.23,
+        "night_shifts": 14,
+        "night_shifts_baseline_mean": 8.0,
+        "workload_score": 98.0,
+        "period_support_priority": "RED",
+        "target_support_priority_next_month": "RED"
+      },
+      {
+        "month_idx": 8,
+        "date": "2025-08-01",
+        "duty_hours": 239.0,
+        "duty_hours_baseline_mean": 231.52,
+        "duty_pct_change": 3.23,
+        "night_shifts": 9,
+        "night_shifts_baseline_mean": 10.5,
+        "workload_score": 92.0,
+        "period_support_priority": "RED",
+        "target_support_priority_next_month": "RED"
+      },
+      {
+        "month_idx": 9,
+        "date": "2025-09-01",
+        "duty_hours": 249.9,
+        "duty_hours_baseline_mean": 233.8,
+        "duty_pct_change": 6.89,
+        "night_shifts": 8,
+        "night_shifts_baseline_mean": 11.5,
+        "workload_score": 98.0,
+        "period_support_priority": "RED",
+        "target_support_priority_next_month": "RED"
+      },
+      {
+        "month_idx": 10,
+        "date": "2025-10-01",
+        "duty_hours": 252.9,
+        "duty_hours_baseline_mean": 240.9,
+        "duty_pct_change": 4.98,
+        "night_shifts": 13,
+        "night_shifts_baseline_mean": 11.0,
+        "workload_score": 98.0,
+        "period_support_priority": "RED",
+        "target_support_priority_next_month": "RED"
+      },
+      {
+        "month_idx": 11,
+        "date": "2025-11-01",
+        "duty_hours": 249.8,
+        "duty_hours_baseline_mean": 246.38,
+        "duty_pct_change": 1.39,
+        "night_shifts": 14,
+        "night_shifts_baseline_mean": 11.0,
+        "workload_score": 98.0,
+        "period_support_priority": "RED",
+        "target_support_priority_next_month": "ORANGE"
+      },
+      {
+        "month_idx": 12,
+        "date": "2025-12-01",
+        "duty_hours": 245.6,
+        "duty_hours_baseline_mean": 247.9,
+        "duty_pct_change": -0.93,
+        "night_shifts": 9,
+        "night_shifts_baseline_mean": 11.0,
+        "workload_score": 98.0,
+        "period_support_priority": "ORANGE",
+        "target_support_priority_next_month": "N/A"
+      }
+    ]
+  }
+}

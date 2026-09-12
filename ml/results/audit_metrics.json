@@ -1,0 +1,540 @@
+{
+  "class_distributions": {
+    "TRAIN (Months 1-7)": {
+      "GREEN": {
+        "count": 6456,
+        "pct": 62.74
+      },
+      "YELLOW": {
+        "count": 589,
+        "pct": 5.72
+      },
+      "ORANGE": {
+        "count": 2332,
+        "pct": 22.66
+      },
+      "RED": {
+        "count": 913,
+        "pct": 8.87
+      }
+    },
+    "VAL (Months 8-9)": {
+      "GREEN": {
+        "count": 2470,
+        "pct": 84.01
+      },
+      "YELLOW": {
+        "count": 15,
+        "pct": 0.51
+      },
+      "ORANGE": {
+        "count": 129,
+        "pct": 4.39
+      },
+      "RED": {
+        "count": 326,
+        "pct": 11.09
+      }
+    },
+    "TEST (Months 10-11)": {
+      "GREEN": {
+        "count": 2642,
+        "pct": 89.86
+      },
+      "YELLOW": {
+        "count": 12,
+        "pct": 0.41
+      },
+      "ORANGE": {
+        "count": 67,
+        "pct": 2.28
+      },
+      "RED": {
+        "count": 219,
+        "pct": 7.45
+      }
+    }
+  },
+  "model_comparison": {
+    "Logistic Regression": {
+      "macro_f1": 0.4225,
+      "weighted_f1": 0.7988,
+      "accuracy": 0.7,
+      "hr_precision": 0.6588,
+      "hr_recall": 0.972,
+      "hr_f1": 0.7853,
+      "report": {
+        "GREEN": {
+          "precision": 0.9924406047516199,
+          "recall": 0.6956850870552612,
+          "f1-score": 0.8179795282599021,
+          "support": 2642.0
+        },
+        "YELLOW": {
+          "precision": 0.009009009009009009,
+          "recall": 0.5,
+          "f1-score": 0.017699115044247787,
+          "support": 12.0
+        },
+        "ORANGE": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 67.0
+        },
+        "RED": {
+          "precision": 0.7588652482269503,
+          "recall": 0.9771689497716894,
+          "f1-score": 0.8542914171656687,
+          "support": 219.0
+        },
+        "accuracy": 0.7,
+        "macro avg": {
+          "precision": 0.4400787154968948,
+          "recall": 0.5432135092067377,
+          "f1-score": 0.42249251511745467,
+          "support": 2940.0
+        },
+        "weighted avg": {
+          "precision": 0.9484107738855747,
+          "recall": 0.7,
+          "f1-score": 0.79877691272193,
+          "support": 2940.0
+        }
+      },
+      "cm": [
+        [
+          1838,
+          660,
+          140,
+          4
+        ],
+        [
+          6,
+          6,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          64
+        ],
+        [
+          5,
+          0,
+          0,
+          214
+        ]
+      ]
+    },
+    "Random Forest": {
+      "macro_f1": 0.4734,
+      "weighted_f1": 0.9618,
+      "accuracy": 0.9731,
+      "hr_precision": 1.0,
+      "hr_recall": 1.0,
+      "hr_f1": 1.0,
+      "report": {
+        "GREEN": {
+          "precision": 0.9954785229841748,
+          "recall": 1.0,
+          "f1-score": 0.9977341389728097,
+          "support": 2642.0
+        },
+        "YELLOW": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 12.0
+        },
+        "ORANGE": {
+          "precision": 0.5,
+          "recall": 0.014925373134328358,
+          "f1-score": 0.028985507246376812,
+          "support": 67.0
+        },
+        "RED": {
+          "precision": 0.7676056338028169,
+          "recall": 0.9954337899543378,
+          "f1-score": 0.8667992047713717,
+          "support": 219.0
+        },
+        "accuracy": 0.9731292517006803,
+        "macro avg": {
+          "precision": 0.565771039196748,
+          "recall": 0.5025897907721666,
+          "f1-score": 0.47337971274763957,
+          "support": 2940.0
+        },
+        "weighted avg": {
+          "precision": 0.9631496229683697,
+          "recall": 0.9731292517006803,
+          "f1-score": 0.961831513604286,
+          "support": 2940.0
+        }
+      },
+      "cm": [
+        [
+          2642,
+          0,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          66
+        ],
+        [
+          0,
+          0,
+          1,
+          218
+        ]
+      ]
+    },
+    "XGBoost": {
+      "macro_f1": 0.4714,
+      "weighted_f1": 0.9577,
+      "accuracy": 0.9653,
+      "hr_precision": 0.9795,
+      "hr_recall": 1.0,
+      "hr_f1": 0.9896,
+      "report": {
+        "GREEN": {
+          "precision": 0.9954389965792474,
+          "recall": 0.9912944738834216,
+          "f1-score": 0.9933624122890196,
+          "support": 2642.0
+        },
+        "YELLOW": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 12.0
+        },
+        "ORANGE": {
+          "precision": 0.14285714285714285,
+          "recall": 0.014925373134328358,
+          "f1-score": 0.02702702702702703,
+          "support": 67.0
+        },
+        "RED": {
+          "precision": 0.7649122807017544,
+          "recall": 0.9954337899543378,
+          "f1-score": 0.8650793650793651,
+          "support": 219.0
+        },
+        "accuracy": 0.9653061224489796,
+        "macro avg": {
+          "precision": 0.4758021050345361,
+          "recall": 0.5004134092430219,
+          "f1-score": 0.47136720109885294,
+          "support": 2940.0
+        },
+        "weighted avg": {
+          "precision": 0.9547745057848586,
+          "recall": 0.9653061224489796,
+          "f1-score": 0.9577301649764562,
+          "support": 2940.0
+        }
+      },
+      "cm": [
+        [
+          2619,
+          17,
+          5,
+          1
+        ],
+        [
+          12,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          66
+        ],
+        [
+          0,
+          0,
+          1,
+          218
+        ]
+      ]
+    },
+    "HistGradientBoosting": {
+      "macro_f1": 0.4776,
+      "weighted_f1": 0.9191,
+      "accuracy": 0.8918,
+      "hr_precision": 0.5597,
+      "hr_recall": 1.0,
+      "hr_f1": 0.7177,
+      "report": {
+        "GREEN": {
+          "precision": 0.9954413593037712,
+          "recall": 0.9091597274791824,
+          "f1-score": 0.9503461918892186,
+          "support": 2642.0
+        },
+        "YELLOW": {
+          "precision": 0.0625,
+          "recall": 0.08333333333333333,
+          "f1-score": 0.07142857142857142,
+          "support": 12.0
+        },
+        "ORANGE": {
+          "precision": 0.017316017316017316,
+          "recall": 0.05970149253731343,
+          "f1-score": 0.026845637583892617,
+          "support": 67.0
+        },
+        "RED": {
+          "precision": 0.7678571428571429,
+          "recall": 0.9817351598173516,
+          "f1-score": 0.8617234468937875,
+          "support": 219.0
+        },
+        "accuracy": 0.8918367346938776,
+        "macro avg": {
+          "precision": 0.4607786298692329,
+          "recall": 0.5084824282917952,
+          "f1-score": 0.47758596194886754,
+          "support": 2940.0
+        },
+        "weighted avg": {
+          "precision": 0.9523901220157996,
+          "recall": 0.8918367346938776,
+          "f1-score": 0.9191115219103124,
+          "support": 2940.0
+        }
+      },
+      "cm": [
+        [
+          2402,
+          15,
+          223,
+          2
+        ],
+        [
+          11,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          4,
+          63
+        ],
+        [
+          0,
+          0,
+          4,
+          215
+        ]
+      ]
+    }
+  },
+  "fairness_audit": {
+    "department": {
+      "Human Resources": {
+        "sample_size": 126,
+        "positives": 10,
+        "precision": 0.4348,
+        "recall": 1.0,
+        "f1": 0.6061,
+        "fpr": 0.1121,
+        "fnr": 0.0
+      },
+      "Research & Development": {
+        "sample_size": 1922,
+        "positives": 192,
+        "precision": 0.5664,
+        "recall": 1.0,
+        "f1": 0.7232,
+        "fpr": 0.085,
+        "fnr": 0.0
+      },
+      "Sales": {
+        "sample_size": 892,
+        "positives": 84,
+        "precision": 0.5638,
+        "recall": 1.0,
+        "f1": 0.721,
+        "fpr": 0.0804,
+        "fnr": 0.0
+      }
+    },
+    "job_role": {
+      "Healthcare Representative": {
+        "sample_size": 262,
+        "positives": 26,
+        "precision": 0.6047,
+        "recall": 1.0,
+        "f1": 0.7536,
+        "fpr": 0.072,
+        "fnr": 0.0
+      },
+      "Human Resources": {
+        "sample_size": 104,
+        "positives": 6,
+        "precision": 0.4,
+        "recall": 1.0,
+        "f1": 0.5714,
+        "fpr": 0.0918,
+        "fnr": 0.0
+      },
+      "Laboratory Technician": {
+        "sample_size": 518,
+        "positives": 68,
+        "precision": 0.6667,
+        "recall": 1.0,
+        "f1": 0.8,
+        "fpr": 0.0756,
+        "fnr": 0.0
+      },
+      "Manager": {
+        "sample_size": 204,
+        "positives": 20,
+        "precision": 0.5405,
+        "recall": 1.0,
+        "f1": 0.7018,
+        "fpr": 0.0924,
+        "fnr": 0.0
+      },
+      "Manufacturing Director": {
+        "sample_size": 290,
+        "positives": 18,
+        "precision": 0.45,
+        "recall": 1.0,
+        "f1": 0.6207,
+        "fpr": 0.0809,
+        "fnr": 0.0
+      },
+      "Research Director": {
+        "sample_size": 160,
+        "positives": 18,
+        "precision": 0.5143,
+        "recall": 1.0,
+        "f1": 0.6792,
+        "fpr": 0.1197,
+        "fnr": 0.0
+      },
+      "Research Scientist": {
+        "sample_size": 584,
+        "positives": 52,
+        "precision": 0.5098,
+        "recall": 1.0,
+        "f1": 0.6753,
+        "fpr": 0.094,
+        "fnr": 0.0
+      },
+      "Sales Executive": {
+        "sample_size": 652,
+        "positives": 68,
+        "precision": 0.5484,
+        "recall": 1.0,
+        "f1": 0.7083,
+        "fpr": 0.0959,
+        "fnr": 0.0
+      },
+      "Sales Representative": {
+        "sample_size": 166,
+        "positives": 10,
+        "precision": 0.7692,
+        "recall": 1.0,
+        "f1": 0.8696,
+        "fpr": 0.0192,
+        "fnr": 0.0
+      }
+    },
+    "job_level": {
+      "1": {
+        "sample_size": 1086,
+        "positives": 106,
+        "precision": 0.5668,
+        "recall": 1.0,
+        "f1": 0.7235,
+        "fpr": 0.0827,
+        "fnr": 0.0
+      },
+      "2": {
+        "sample_size": 1068,
+        "positives": 92,
+        "precision": 0.5318,
+        "recall": 1.0,
+        "f1": 0.6943,
+        "fpr": 0.083,
+        "fnr": 0.0
+      },
+      "3": {
+        "sample_size": 436,
+        "positives": 52,
+        "precision": 0.5977,
+        "recall": 1.0,
+        "f1": 0.7482,
+        "fpr": 0.0911,
+        "fnr": 0.0
+      },
+      "4": {
+        "sample_size": 212,
+        "positives": 24,
+        "precision": 0.5854,
+        "recall": 1.0,
+        "f1": 0.7385,
+        "fpr": 0.0904,
+        "fnr": 0.0
+      },
+      "5": {
+        "sample_size": 138,
+        "positives": 12,
+        "precision": 0.5217,
+        "recall": 1.0,
+        "f1": 0.6857,
+        "fpr": 0.0873,
+        "fnr": 0.0
+      }
+    }
+  },
+  "brier_score_high_risk": 0.0358,
+  "calibration_curve": {
+    "predicted_prob": [
+      0.017061452994736152,
+      0.14648622431271047,
+      0.2377092034032517,
+      0.34833949319366186,
+      0.465112334473251,
+      0.5561147354116088,
+      0.6456385841190188,
+      0.7342705727923019,
+      0.8380147492924832,
+      0.9915591377467801
+    ],
+    "true_prob": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5,
+      1.0
+    ]
+  }
+}

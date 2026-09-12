@@ -1,0 +1,408 @@
+{
+  "model_name": "Random Forest (Balanced)",
+  "artifact_path": "/Users/shivrajawat/Documents/SAATHI/ml/models/support_priority_model.joblib",
+  "training_date": "2026-09-08 12:57:53",
+  "random_seed": 42,
+  "features": {
+    "numerical": [
+      "age",
+      "job_level",
+      "education_level",
+      "distance_from_home",
+      "total_working_years",
+      "years_in_service",
+      "years_in_current_role",
+      "years_since_last_promotion",
+      "years_with_curr_supervisor",
+      "baseline_env_satisfaction",
+      "baseline_job_satisfaction",
+      "baseline_job_involvement",
+      "baseline_work_life_balance",
+      "baseline_rel_satisfaction",
+      "performance_rating",
+      "training_times_last_year",
+      "monthly_income",
+      "num_prior_organizations",
+      "duty_hours",
+      "overtime_hours",
+      "night_shifts",
+      "consecutive_duty_days",
+      "rest_hours",
+      "workload_score",
+      "operational_intensity",
+      "schedule_irregularity",
+      "is_deployed",
+      "dep_duration_days",
+      "dep_intensity",
+      "dep_hardship",
+      "took_leave",
+      "leave_duration_days",
+      "days_since_prev_leave",
+      "sleep_quality",
+      "fatigue_level",
+      "work_stress",
+      "mood_wellbeing",
+      "work_life_balance",
+      "job_satisfaction",
+      "recovery_quality",
+      "self_reported_strain",
+      "attendance_change",
+      "leave_frequency_change",
+      "workload_change",
+      "sleep_change",
+      "routine_deviation",
+      "performance_change",
+      "schedule_change",
+      "recovery_change",
+      "duty_hours_pct_change_vs_baseline",
+      "duty_hours_zscore_vs_baseline",
+      "duty_hours_lag1_diff",
+      "overtime_hours_pct_change_vs_baseline",
+      "overtime_hours_zscore_vs_baseline",
+      "night_shifts_pct_change_vs_baseline",
+      "night_shifts_zscore_vs_baseline",
+      "night_shifts_lag1_diff",
+      "consecutive_duty_days_pct_change_vs_baseline",
+      "consecutive_duty_days_zscore_vs_baseline",
+      "rest_hours_pct_change_vs_baseline",
+      "rest_hours_zscore_vs_baseline",
+      "workload_score_pct_change_vs_baseline",
+      "workload_score_zscore_vs_baseline",
+      "workload_score_lag1_diff",
+      "sleep_quality_pct_change_vs_baseline",
+      "sleep_quality_zscore_vs_baseline",
+      "fatigue_level_pct_change_vs_baseline",
+      "fatigue_level_zscore_vs_baseline",
+      "self_reported_strain_pct_change_vs_baseline",
+      "self_reported_strain_zscore_vs_baseline",
+      "data_completeness",
+      "baseline_available",
+      "dep_recovery_required",
+      "checkin_completion"
+    ],
+    "categorical": [
+      "department",
+      "job_role",
+      "gender",
+      "marital_status",
+      "overtime_eligible",
+      "business_travel",
+      "dep_type",
+      "dep_location",
+      "leave_type"
+    ],
+    "transformed_names": [
+      "age",
+      "job_level",
+      "education_level",
+      "distance_from_home",
+      "total_working_years",
+      "years_in_service",
+      "years_in_current_role",
+      "years_since_last_promotion",
+      "years_with_curr_supervisor",
+      "baseline_env_satisfaction",
+      "baseline_job_satisfaction",
+      "baseline_job_involvement",
+      "baseline_work_life_balance",
+      "baseline_rel_satisfaction",
+      "performance_rating",
+      "training_times_last_year",
+      "monthly_income",
+      "num_prior_organizations",
+      "duty_hours",
+      "overtime_hours",
+      "night_shifts",
+      "consecutive_duty_days",
+      "rest_hours",
+      "workload_score",
+      "operational_intensity",
+      "schedule_irregularity",
+      "is_deployed",
+      "dep_duration_days",
+      "dep_intensity",
+      "dep_hardship",
+      "took_leave",
+      "leave_duration_days",
+      "days_since_prev_leave",
+      "sleep_quality",
+      "fatigue_level",
+      "work_stress",
+      "mood_wellbeing",
+      "work_life_balance",
+      "job_satisfaction",
+      "recovery_quality",
+      "self_reported_strain",
+      "attendance_change",
+      "leave_frequency_change",
+      "workload_change",
+      "sleep_change",
+      "routine_deviation",
+      "performance_change",
+      "schedule_change",
+      "recovery_change",
+      "duty_hours_pct_change_vs_baseline",
+      "duty_hours_zscore_vs_baseline",
+      "duty_hours_lag1_diff",
+      "overtime_hours_pct_change_vs_baseline",
+      "overtime_hours_zscore_vs_baseline",
+      "night_shifts_pct_change_vs_baseline",
+      "night_shifts_zscore_vs_baseline",
+      "night_shifts_lag1_diff",
+      "consecutive_duty_days_pct_change_vs_baseline",
+      "consecutive_duty_days_zscore_vs_baseline",
+      "rest_hours_pct_change_vs_baseline",
+      "rest_hours_zscore_vs_baseline",
+      "workload_score_pct_change_vs_baseline",
+      "workload_score_zscore_vs_baseline",
+      "workload_score_lag1_diff",
+      "sleep_quality_pct_change_vs_baseline",
+      "sleep_quality_zscore_vs_baseline",
+      "fatigue_level_pct_change_vs_baseline",
+      "fatigue_level_zscore_vs_baseline",
+      "self_reported_strain_pct_change_vs_baseline",
+      "self_reported_strain_zscore_vs_baseline",
+      "data_completeness",
+      "baseline_available",
+      "dep_recovery_required",
+      "checkin_completion",
+      "department_Human Resources",
+      "department_Research & Development",
+      "department_Sales",
+      "job_role_Healthcare Representative",
+      "job_role_Human Resources",
+      "job_role_Laboratory Technician",
+      "job_role_Manager",
+      "job_role_Manufacturing Director",
+      "job_role_Research Director",
+      "job_role_Research Scientist",
+      "job_role_Sales Executive",
+      "job_role_Sales Representative",
+      "gender_Female",
+      "gender_Male",
+      "marital_status_Divorced",
+      "marital_status_Married",
+      "marital_status_Single",
+      "overtime_eligible_No",
+      "overtime_eligible_Yes",
+      "business_travel_Non-Travel",
+      "business_travel_TravelRarely",
+      "business_travel_Travel_Frequently",
+      "business_travel_Travel_Rarely",
+      "dep_type_Extended",
+      "dep_type_High Tempo",
+      "dep_type_None",
+      "dep_type_Routine",
+      "dep_location_Base",
+      "dep_location_High Altitude/Extreme",
+      "dep_location_Remote/Difficult Terrain",
+      "dep_location_Semi-Urban Outpost",
+      "dep_location_Urban Base",
+      "leave_type_Annual",
+      "leave_type_Casual",
+      "leave_type_Medical/Authorized",
+      "leave_type_None",
+      "leave_type_Recovery"
+    ]
+  },
+  "target_classes": [
+    "GREEN",
+    "YELLOW",
+    "ORANGE",
+    "RED"
+  ],
+  "target_mapping": {
+    "GREEN": 0,
+    "YELLOW": 1,
+    "ORANGE": 2,
+    "RED": 3
+  },
+  "time_split": {
+    "train_months": "Months 1-7",
+    "val_months": "Months 8-9",
+    "test_months": "Months 10-11",
+    "prediction_horizon": "T+1 Month"
+  },
+  "metrics_summary": {
+    "Logistic Regression (Balanced)": {
+      "val_macro_f1": 0.5087639049119184,
+      "test_macro_f1": 0.42249251511745467,
+      "test_weighted_f1": 0.79877691272193,
+      "test_high_risk_recall": 0.4885844748858447,
+      "classification_report": {
+        "GREEN": {
+          "precision": 0.9924406047516199,
+          "recall": 0.6956850870552612,
+          "f1-score": 0.8179795282599021,
+          "support": 2642.0
+        },
+        "YELLOW": {
+          "precision": 0.009009009009009009,
+          "recall": 0.5,
+          "f1-score": 0.017699115044247787,
+          "support": 12.0
+        },
+        "ORANGE": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 67.0
+        },
+        "RED": {
+          "precision": 0.7588652482269503,
+          "recall": 0.9771689497716894,
+          "f1-score": 0.8542914171656687,
+          "support": 219.0
+        },
+        "accuracy": 0.7,
+        "macro avg": {
+          "precision": 0.4400787154968948,
+          "recall": 0.5432135092067377,
+          "f1-score": 0.42249251511745467,
+          "support": 2940.0
+        },
+        "weighted avg": {
+          "precision": 0.9484107738855747,
+          "recall": 0.7,
+          "f1-score": 0.79877691272193,
+          "support": 2940.0
+        }
+      }
+    },
+    "Random Forest (Balanced)": {
+      "val_macro_f1": 0.5515197542444314,
+      "test_macro_f1": 0.47337971274763957,
+      "test_weighted_f1": 0.961831513604286,
+      "test_high_risk_recall": 0.5051795815443331,
+      "classification_report": {
+        "GREEN": {
+          "precision": 0.9954785229841748,
+          "recall": 1.0,
+          "f1-score": 0.9977341389728097,
+          "support": 2642.0
+        },
+        "YELLOW": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 12.0
+        },
+        "ORANGE": {
+          "precision": 0.5,
+          "recall": 0.014925373134328358,
+          "f1-score": 0.028985507246376812,
+          "support": 67.0
+        },
+        "RED": {
+          "precision": 0.7676056338028169,
+          "recall": 0.9954337899543378,
+          "f1-score": 0.8667992047713717,
+          "support": 219.0
+        },
+        "accuracy": 0.9731292517006803,
+        "macro avg": {
+          "precision": 0.565771039196748,
+          "recall": 0.5025897907721666,
+          "f1-score": 0.47337971274763957,
+          "support": 2940.0
+        },
+        "weighted avg": {
+          "precision": 0.9631496229683697,
+          "recall": 0.9731292517006803,
+          "f1-score": 0.961831513604286,
+          "support": 2940.0
+        }
+      }
+    },
+    "XGBoost (Weighted)": {
+      "val_macro_f1": 0.5339791273251505,
+      "test_macro_f1": 0.47136720109885294,
+      "test_weighted_f1": 0.9577301649764562,
+      "test_high_risk_recall": 0.5051795815443331,
+      "classification_report": {
+        "GREEN": {
+          "precision": 0.9954389965792474,
+          "recall": 0.9912944738834216,
+          "f1-score": 0.9933624122890196,
+          "support": 2642.0
+        },
+        "YELLOW": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 12.0
+        },
+        "ORANGE": {
+          "precision": 0.14285714285714285,
+          "recall": 0.014925373134328358,
+          "f1-score": 0.02702702702702703,
+          "support": 67.0
+        },
+        "RED": {
+          "precision": 0.7649122807017544,
+          "recall": 0.9954337899543378,
+          "f1-score": 0.8650793650793651,
+          "support": 219.0
+        },
+        "accuracy": 0.9653061224489796,
+        "macro avg": {
+          "precision": 0.4758021050345361,
+          "recall": 0.5004134092430219,
+          "f1-score": 0.47136720109885294,
+          "support": 2940.0
+        },
+        "weighted avg": {
+          "precision": 0.9547745057848586,
+          "recall": 0.9653061224489796,
+          "f1-score": 0.9577301649764562,
+          "support": 2940.0
+        }
+      }
+    },
+    "HistGradientBoosting": {
+      "val_macro_f1": 0.48774808679331016,
+      "test_macro_f1": 0.47758596194886754,
+      "test_weighted_f1": 0.9191115219103124,
+      "test_high_risk_recall": 0.5207183261773325,
+      "classification_report": {
+        "GREEN": {
+          "precision": 0.9954413593037712,
+          "recall": 0.9091597274791824,
+          "f1-score": 0.9503461918892186,
+          "support": 2642.0
+        },
+        "YELLOW": {
+          "precision": 0.0625,
+          "recall": 0.08333333333333333,
+          "f1-score": 0.07142857142857142,
+          "support": 12.0
+        },
+        "ORANGE": {
+          "precision": 0.017316017316017316,
+          "recall": 0.05970149253731343,
+          "f1-score": 0.026845637583892617,
+          "support": 67.0
+        },
+        "RED": {
+          "precision": 0.7678571428571429,
+          "recall": 0.9817351598173516,
+          "f1-score": 0.8617234468937875,
+          "support": 219.0
+        },
+        "accuracy": 0.8918367346938776,
+        "macro avg": {
+          "precision": 0.4607786298692329,
+          "recall": 0.5084824282917952,
+          "f1-score": 0.47758596194886754,
+          "support": 2940.0
+        },
+        "weighted avg": {
+          "precision": 0.9523901220157996,
+          "recall": 0.8918367346938776,
+          "f1-score": 0.9191115219103124,
+          "support": 2940.0
+        }
+      }
+    }
+  }
+}
