@@ -16,6 +16,7 @@ from backend.app.models.user import User, Role
 from backend.app.models.personnel import Personnel, HRProfile
 from backend.app.core.security import get_password_hash
 from backend.app.core.taxonomy import map_department, map_job_role
+from backend.app.core.config import settings
 
 ROLES_LIST = [
     ("ADMIN", "System administrator with full configuration and audit access"),
@@ -70,8 +71,13 @@ def init_db():
         db.commit()
 
         # 3. Seed Personnel Master Profiles (from data/processed/personnel_master.csv)
-        personnel_csv = Path(__file__).resolve().parents[3] / "data" / "processed" / "personnel_master.csv"
-        if personnel_csv.exists():
+        candidate_paths = [
+            Path(__file__).resolve().parents[3] / "data" / "processed" / "personnel_master.csv",
+            Path.cwd() / "data" / "processed" / "personnel_master.csv",
+            settings.BASE_DIR / "data" / "processed" / "personnel_master.csv"
+        ]
+        personnel_csv = next((p for p in candidate_paths if p.exists()), None)
+        if personnel_csv and personnel_csv.exists():
             existing_count = db.query(Personnel).count()
             if existing_count == 0:
                 print(f"Seeding personnel from {personnel_csv} with synthetic force taxonomy...")
@@ -129,7 +135,6 @@ def init_db():
                 if updated_cnt > 0:
                     db.commit()
                     print(f"Migrated {updated_cnt} personnel profiles to synthetic force taxonomy.")
-        print("Database initialization complete.")
         print("Database initialization complete.")
     finally:
         db.close()

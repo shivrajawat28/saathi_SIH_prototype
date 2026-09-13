@@ -16,7 +16,7 @@ from backend.app.core.rate_limit import rate_limit
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
-@router.post("/login", response_model=Token, dependencies=[Depends(rate_limit(max_requests=15, window_seconds=60))])
+@router.post("/login", response_model=Token, dependencies=[Depends(rate_limit(max_requests=60, window_seconds=60))])
 def login(request: Request, login_data: LoginRequest, db: Session = Depends(get_db)):
     """
     Authenticate user with username and password, returning a signed JWT access token.

@@ -38,16 +38,27 @@ class MLAdapter:
         return cls._instance
 
     def _initialize(self):
-        model_path = Path(settings.MODEL_PATH)
-        meta_path = Path(settings.METADATA_PATH)
+        model_candidates = [
+            Path(settings.MODEL_PATH),
+            settings.BASE_DIR / "ml/models/support_priority_model.joblib",
+            Path.cwd() / "ml/models/support_priority_model.joblib",
+            Path(__file__).resolve().parents[3] / "ml/models/support_priority_model.joblib",
+            Path(__file__).resolve().parents[4] / "ml/models/support_priority_model.joblib",
+        ]
+        model_path = next((p for p in model_candidates if p.exists()), None)
+        if not model_path:
+            raise FileNotFoundError("Locked ML model artifact support_priority_model.joblib not found.")
 
-        if not model_path.exists():
-            # Fallback path resolution
-            model_path = settings.BASE_DIR / "ml/models/support_priority_model.joblib"
-            meta_path = settings.BASE_DIR / "ml/models/model_metadata.json"
-
-        if not model_path.exists():
-            raise FileNotFoundError(f"Locked ML model artifact not found at {model_path}")
+        meta_candidates = [
+            Path(settings.METADATA_PATH),
+            settings.BASE_DIR / "ml/models/model_metadata.json",
+            Path.cwd() / "ml/models/model_metadata.json",
+            Path(__file__).resolve().parents[3] / "ml/models/model_metadata.json",
+            Path(__file__).resolve().parents[4] / "ml/models/model_metadata.json",
+        ]
+        meta_path = next((p for p in meta_candidates if p.exists()), None)
+        if not meta_path:
+            raise FileNotFoundError("Model metadata artifact model_metadata.json not found.")
 
         self.pipeline = joblib.load(model_path)
         with open(meta_path, "r") as f:

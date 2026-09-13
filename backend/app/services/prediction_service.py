@@ -21,12 +21,25 @@ class PredictionService:
     @staticmethod
     def get_personnel_history(personnel_id: str) -> pd.DataFrame:
         """Loads complete longitudinal history for a given personnel ID."""
-        parquet_path = settings.BASE_DIR / "data/processed/integrated_longitudinal.parquet"
-        if not parquet_path.exists():
-            csv_path = settings.BASE_DIR / "data/processed/integrated_longitudinal.csv"
-            df = pd.read_csv(csv_path)
-        else:
+        from pathlib import Path
+        parquet_candidates = [
+            settings.BASE_DIR / "data/processed/integrated_longitudinal.parquet",
+            Path.cwd() / "data/processed/integrated_longitudinal.parquet",
+            Path(__file__).resolve().parents[3] / "data/processed/integrated_longitudinal.parquet",
+        ]
+        parquet_path = next((p for p in parquet_candidates if p.exists()), None)
+        if parquet_path:
             df = pd.read_parquet(parquet_path)
+        else:
+            csv_candidates = [
+                settings.BASE_DIR / "data/processed/integrated_longitudinal.csv",
+                Path.cwd() / "data/processed/integrated_longitudinal.csv",
+                Path(__file__).resolve().parents[3] / "data/processed/integrated_longitudinal.csv",
+            ]
+            csv_path = next((p for p in csv_candidates if p.exists()), None)
+            if not csv_path or not csv_path.exists():
+                raise FileNotFoundError("Longitudinal dataset not found in data/processed/")
+            df = pd.read_csv(csv_path)
 
         p_records = df[df['personnel_id'] == personnel_id].sort_values('month_idx')
         return p_records
