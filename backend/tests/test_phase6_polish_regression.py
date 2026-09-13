@@ -124,3 +124,19 @@ def test_p1_10_what_if_simulation_integrity(client, welfare_token):
     assert sim_data["projected_score"] < sim_data["current_score"]
     assert sim_data["projected_delta"] < 0
     assert len(sim_data["parameter_changes"]) >= 3
+
+def test_shap_explainability_and_app_import_integrity():
+    """
+    Render Deployment Regression: Ensure SHAP is installed, explainer initializes,
+    and FastAPI production app import path is clean.
+    """
+    import shap
+    assert shap.__version__ is not None
+
+    from ml.explainability.explainer import WelfareExplainer
+    explainer = WelfareExplainer()
+    assert explainer.classifier is not None
+
+    from backend.app.main import app
+    assert app.title == "SAATHI AI Welfare Decision Support System"
+
