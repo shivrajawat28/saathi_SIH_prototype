@@ -8,7 +8,7 @@ psycopg2-binary>=2.9.9
 passlib[bcrypt]==1.7.4
 bcrypt==4.0.1
 pyjwt>=2.8.0
-pandas>=2.2.0
+pandas>=2.2.0,<3.0.0
 numpy>=1.26.0,<3.0.0
 scipy>=1.12.0
 scikit-learn==1.6.1
