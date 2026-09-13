@@ -140,3 +140,36 @@ def test_shap_explainability_and_app_import_integrity():
     from backend.app.main import app
     assert app.title == "SAATHI AI Welfare Decision Support System"
 
+def test_locked_ml_artifact_loading_and_remainder_cols_regression(client, welfare_token):
+    """
+    Render Deployment Regression: Ensure scikit-learn unpickling of ColumnTransformer
+    with _RemainderColsList succeeds and produces canonical P-000013 predictions.
+    """
+    import joblib
+    from pathlib import Path
+    from backend.app.ml.adapter import ml_adapter
+    from backend.app.services.prediction_service import PredictionService
+
+    # 1. Model file exists and loads cleanly
+    model_path = Path("ml/models/support_priority_model.joblib")
+    assert model_path.exists()
+    loaded_pipe = joblib.load(model_path)
+    assert "preprocessor" in loaded_pipe.named_steps
+    assert "classifier" in loaded_pipe.named_steps
+
+    # 2. ML Adapter is initialized
+    assert ml_adapter.pipeline is not None
+    assert ml_adapter.metadata["model_name"] == "Random Forest (Balanced)"
+
+    # 3. Canonical P-000013 inference produces exact expected results
+    headers = {"Authorization": f"Bearer {welfare_token}"}
+    res = client.post("/api/v1/predictions/personnel/P-000013", headers=headers)
+    assert res.status_code == 200
+    data = res.json()
+    assert data["personnel_id"] == "P-000013"
+    assert data["priority"] == "RED"
+    assert round(data["support_score"], 1) == 88.1
+    assert data["high_risk_probability"] > 0.85
+    assert len(data["top_factors"]) >= 3
+
+
