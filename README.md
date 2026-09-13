@@ -1,4 +1,4 @@
-# SAATHI: AI-Based Predictive Personnel Stress & Welfare Monitoring System
+# SAATHI: AI-Based Predictive Personnel Stress & Welfare Monitoring System.
 
 [![Tests](https://img.shields.io/badge/pytest-56%20passed-brightgreen.svg)]()
 [![Vitest](https://img.shields.io/badge/vitest-16%20passed-brightgreen.svg)]()
