@@ -46,9 +46,12 @@ class CommanderService:
         db: Session,
         unit_filter: Optional[str] = None,
         status_filter: Optional[str] = None,
+        follow_up_status: Optional[str] = None,
+        search_query: Optional[str] = None,
         min_days_overdue: Optional[int] = None,
         limit: int = 50,
-        offset: int = 0
+        offset: int = 0,
+        page: int = 1
     ) -> PendingCheckInsSummary:
         """
         Computes pending monthly check-ins for the active unit strength.
@@ -120,13 +123,15 @@ class CommanderService:
                 is_submitted_this_month = True
 
             fu_record = follow_up_map.get(pid)
-            fu_status = fu_record.status if fu_record else "NONE"
+            raw_fu_status = fu_record.status if fu_record else "NONE"
+            # Normalize status for frontend compatibility
+            fu_status = "REQUESTED" if raw_fu_status == "FOLLOW_UP_REQUESTED" else raw_fu_status
             fu_at = fu_record.requested_at if fu_record else None
             fu_by = fu_record.requested_by_username if fu_record else None
 
             if is_submitted_this_month:
                 total_submitted += 1
-                if fu_status == "FOLLOW_UP_REQUESTED":
+                if fu_status in ("REQUESTED", "FOLLOW_UP_REQUESTED"):
                     # If follow-up was requested and personnel submitted, mark completed
                     if fu_record:
                         fu_record.status = "COMPLETED"
@@ -149,19 +154,40 @@ class CommanderService:
             else:
                 submission_status = "PENDING"
 
-            if fu_status == "FOLLOW_UP_REQUESTED":
+            if fu_status in ("REQUESTED", "FOLLOW_UP_REQUESTED"):
                 total_followup_requested += 1
 
             # Apply query filters
-            if unit_filter and unit_filter.lower() not in dept_name.lower():
-                continue
-            if status_filter:
-                if status_filter.upper() == "OVERDUE" and submission_status != "OVERDUE":
+            if unit_filter and unit_filter.strip():
+                if unit_filter.strip().lower() not in dept_name.lower():
                     continue
-                if status_filter.upper() == "FOLLOW_UP_REQUESTED" and fu_status != "FOLLOW_UP_REQUESTED":
+
+            # Search filter (ID, name, department, role)
+            if search_query and search_query.strip():
+                q = search_query.strip().lower()
+                display_str = f"Personnel {pid}".lower()
+                if (q not in pid.lower() and 
+                    q not in display_str and 
+                    q not in dept_name.lower() and 
+                    q not in role_name.lower()):
+                    continue
+
+            # Follow-up status filter
+            effective_fu_filter = follow_up_status or (status_filter if status_filter in ("NONE", "REQUESTED", "FOLLOW_UP_REQUESTED") else None)
+            if effective_fu_filter:
+                eff_fu = effective_fu_filter.upper()
+                if eff_fu == "NONE" and fu_status != "NONE":
+                    continue
+                elif eff_fu in ("REQUESTED", "FOLLOW_UP_REQUESTED") and fu_status not in ("REQUESTED", "FOLLOW_UP_REQUESTED"):
+                    continue
+
+            # Submission status filter
+            if status_filter and status_filter.upper() not in ("NONE", "REQUESTED", "FOLLOW_UP_REQUESTED"):
+                if status_filter.upper() == "OVERDUE" and submission_status != "OVERDUE":
                     continue
                 if status_filter.upper() == "PENDING" and submission_status != "PENDING":
                     continue
+
             if min_days_overdue is not None and days_overdue < min_days_overdue:
                 continue
 
@@ -182,6 +208,8 @@ class CommanderService:
         # Deterministic sorting: Overdue days descending, then personnel_id ascending
         pending_items.sort(key=lambda x: (-x.days_overdue, x.personnel_id))
 
+        total_filtered = len(pending_items)
+
         # Paginate
         paginated_items = pending_items[offset : offset + limit]
 
@@ -191,9 +219,18 @@ class CommanderService:
             total_pending=total_pending,
             total_overdue=total_overdue,
             total_followup_requested=total_followup_requested,
+            overdue_count=total_overdue,
+            followed_up_count=total_followup_requested,
             current_checkin_cycle=cycle_name,
+            cycle_label=cycle_name,
+            cycle_month=current_month_str,
+            total=total_filtered,
+            total_items=total_filtered,
+            page=page,
+            page_size=limit,
             items=paginated_items
         )
+
 
     @classmethod
     def get_personnel_followup_detail(
@@ -328,5 +365,7 @@ class CommanderService:
             personnel_id=personnel_id,
             target_month=current_month_str,
             requested_at=target_fu.requested_at,
+            requested_by_username=commander.username,
             follow_up_status="FOLLOW_UP_REQUESTED"
         )
+

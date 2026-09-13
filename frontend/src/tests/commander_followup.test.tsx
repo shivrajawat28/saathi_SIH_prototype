@@ -37,10 +37,20 @@ vi.mock('../api/analytics', () => ({
 vi.mock('../api/commander', () => ({
   commanderApi: {
     getPendingCheckIns: vi.fn().mockResolvedValue({
+      total_strength: 200,
+      total_submitted_current_month: 0,
       total_pending: 1,
       total_overdue: 1,
       total_followup_requested: 0,
+      overdue_count: 1,
+      followed_up_count: 0,
       current_checkin_cycle: 'September 2026',
+      cycle_label: 'September 2026',
+      cycle_month: '2026-09',
+      total: 1,
+      total_items: 1,
+      page: 1,
+      page_size: 50,
       items: [
         {
           personnel_id: 'P-000042',

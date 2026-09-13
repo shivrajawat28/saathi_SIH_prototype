@@ -337,15 +337,21 @@ export interface PendingCheckInItem {
 }
 
 export interface PendingCheckInsSummary {
+  total_strength?: number;
+  total_submitted_current_month?: number;
   total_pending: number;
+  total_overdue?: number;
+  total_followup_requested?: number;
   overdue_count: number;
   followed_up_count: number;
+  current_checkin_cycle?: string;
   cycle_month: string;
   cycle_label: string;
-  items: PendingCheckInItem[];
+  total?: number;
+  total_items: number;
   page: number;
   page_size: number;
-  total_items: number;
+  items: PendingCheckInItem[];
 }
 
 export interface CheckInFollowUpRequest {

@@ -10,7 +10,7 @@ from backend.app.models.follow_up import CheckInFollowUp
 from backend.app.models.telemetry import WellnessRecord
 
 def test_commander_can_get_pending_checkins(client: TestClient, commander_token: str):
-    """Commander should successfully fetch pending monthly check-ins."""
+    """Commander should successfully fetch pending monthly check-ins with consistent total and pagination counts."""
     headers = {"Authorization": f"Bearer {commander_token}"}
     response = client.get("/api/v1/commander/pending-checkins", headers=headers)
     assert response.status_code == 200
@@ -19,6 +19,13 @@ def test_commander_can_get_pending_checkins(client: TestClient, commander_token:
     assert "total_overdue" in data
     assert "total_followup_requested" in data
     assert "current_checkin_cycle" in data
+    assert "cycle_label" in data
+    assert "total" in data
+    assert "total_items" in data
+    assert "page" in data
+    assert "page_size" in data
+    assert data["total"] == data["total_items"]
+    assert data["total_pending"] >= len(data["items"])
     assert "items" in data
     assert isinstance(data["items"], list)
     assert len(data["items"]) > 0
@@ -31,6 +38,33 @@ def test_commander_can_get_pending_checkins(client: TestClient, commander_token:
     assert "days_overdue" in item
     assert "submission_status" in item
     assert "follow_up_status" in item
+
+def test_commander_pending_checkins_search_and_filtering(client: TestClient, commander_token: str):
+    """Verify search, unit filter, and pagination on pending check-ins endpoint."""
+    headers = {"Authorization": f"Bearer {commander_token}"}
+
+    # Search by personnel ID prefix
+    res_search = client.get("/api/v1/commander/pending-checkins?search=P-000001", headers=headers)
+    assert res_search.status_code == 200
+    search_data = res_search.json()
+    for it in search_data["items"]:
+        assert "P-000001" in it["personnel_id"]
+
+    # Unit filter
+    res_unit = client.get("/api/v1/commander/pending-checkins?unit=Operations", headers=headers)
+    assert res_unit.status_code == 200
+    unit_data = res_unit.json()
+    for it in unit_data["items"]:
+        assert "Operations" in it["unit"]
+
+    # Pagination
+    res_page = client.get("/api/v1/commander/pending-checkins?page=1&page_size=2", headers=headers)
+    assert res_page.status_code == 200
+    page_data = res_page.json()
+    assert page_data["page"] == 1
+    assert page_data["page_size"] == 2
+    assert len(page_data["items"]) <= 2
+
 
 
 def test_commander_pending_checkins_privacy_boundary(client: TestClient, commander_token: str):

@@ -61,7 +61,7 @@ export const CommanderDashboardPage: React.FC = () => {
         follow_up_status: statusFilter || undefined,
         search: searchQuery || undefined,
         page,
-        page_size: 10
+        page_size: 50
       });
       setPendingSummary(res);
     } catch (err) {
@@ -124,6 +124,11 @@ export const CommanderDashboardPage: React.FC = () => {
     );
   }
 
+  const isFollowUpRequested = (status?: string) => status === 'REQUESTED' || status === 'FOLLOW_UP_REQUESTED';
+  const effectiveTotalPending = pendingSummary?.total_items ?? pendingSummary?.total ?? pendingSummary?.total_pending ?? 0;
+  const effectivePageSize = pendingSummary?.page_size ?? 50;
+  const totalPages = Math.max(1, Math.ceil(effectiveTotalPending / effectivePageSize));
+
   return (
     <div className="p-4 sm:p-6 space-y-6 max-w-7xl mx-auto">
       
@@ -158,7 +163,7 @@ export const CommanderDashboardPage: React.FC = () => {
         </div>
       </div>
 
-      {/* SECTION 1: Monthly Check-In Follow-up (NEW FEATURE) */}
+      {/* SECTION 1: Monthly Check-In Follow-up */}
       <div className="bg-white border-2 border-saathi-secondaryLight rounded-lg shadow-gov p-5 sm:p-6 space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-saathi-border pb-4">
           <div>
@@ -167,7 +172,7 @@ export const CommanderDashboardPage: React.FC = () => {
                 Administrative Follow-up
               </span>
               <span className="text-xs font-bold text-saathi-primary">
-                Cycle: {pendingSummary?.cycle_label || 'Current Month'}
+                Cycle: {pendingSummary?.cycle_label || pendingSummary?.current_checkin_cycle || 'Current Month'}
               </span>
             </div>
             <h2 className="text-lg font-black text-saathi-textDark flex items-center gap-2">
@@ -212,7 +217,7 @@ export const CommanderDashboardPage: React.FC = () => {
                 Follow-up Required (&gt;15 Days)
               </span>
               <div className="text-xl font-black text-orange-700 mt-0.5">
-                {pendingSummary?.overdue_count ?? 0}
+                {pendingSummary?.overdue_count ?? pendingSummary?.total_overdue ?? 0}
               </div>
               <span className="text-[10px] text-saathi-textMuted">Elapsed check-in window</span>
             </div>
@@ -227,7 +232,7 @@ export const CommanderDashboardPage: React.FC = () => {
                 Follow-up Requested
               </span>
               <div className="text-xl font-black text-saathi-primary mt-0.5">
-                {pendingSummary?.followed_up_count ?? 0}
+                {pendingSummary?.followed_up_count ?? pendingSummary?.total_followup_requested ?? 0}
               </div>
               <span className="text-[10px] text-saathi-textMuted">Reminder active</span>
             </div>
@@ -266,11 +271,10 @@ export const CommanderDashboardPage: React.FC = () => {
               >
                 <option value="">All Units / Divisions</option>
                 <option value="Operations">Operations</option>
-                <option value="Border Security">Border Security</option>
-                <option value="Rapid Action">Rapid Action</option>
-                <option value="Special Operations">Special Operations</option>
-                <option value="Logistics">Logistics</option>
-                <option value="Signals & Comms">Signals & Comms</option>
+                <option value="Communications & Technology">Communications & Technology</option>
+                <option value="Administration & Welfare">Administration & Welfare</option>
+                <option value="Logistics & Support">Logistics & Support</option>
+                <option value="Training & Readiness">Training & Readiness</option>
               </select>
             </div>
 
@@ -289,7 +293,11 @@ export const CommanderDashboardPage: React.FC = () => {
           </div>
 
           <div className="text-[11px] text-saathi-textMuted font-mono self-end sm:self-auto">
-            Showing {pendingSummary?.items.length ?? 0} of {pendingSummary?.total_items ?? 0} pending
+            {pendingLoading && !pendingSummary ? (
+              <span>Loading pending records...</span>
+            ) : (
+              <span>Showing {pendingSummary?.items.length ?? 0} of {effectiveTotalPending} pending</span>
+            )}
           </div>
         </div>
 
@@ -310,7 +318,7 @@ export const CommanderDashboardPage: React.FC = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-saathi-borderLight text-saathi-textDark bg-white">
-              {pendingLoading ? (
+              {pendingLoading && !pendingSummary ? (
                 <tr>
                   <td colSpan={9} className="py-8 text-center text-saathi-textMuted">
                     <RefreshCw className="w-5 h-5 animate-spin mx-auto mb-2 text-saathi-primary" />
@@ -357,7 +365,7 @@ export const CommanderDashboardPage: React.FC = () => {
                       </span>
                     </td>
                     <td className="py-3 px-3">
-                      {item.follow_up_status === 'REQUESTED' ? (
+                      {isFollowUpRequested(item.follow_up_status) ? (
                         <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-saathi-primarySubtle text-saathi-primary border border-saathi-secondaryLight">
                           <CheckCircle2 className="w-3 h-3" />
                           Follow-up Requested
@@ -377,7 +385,7 @@ export const CommanderDashboardPage: React.FC = () => {
                           <Eye className="w-3 h-3" />
                           View Details
                         </button>
-                        {item.follow_up_status !== 'REQUESTED' && (
+                        {!isFollowUpRequested(item.follow_up_status) && (
                           <button
                             onClick={() => handleSendFollowUp(item.personnel_id)}
                             className="px-2.5 py-1 bg-saathi-primary hover:bg-saathi-primaryDark text-white rounded text-[11px] font-bold transition inline-flex items-center gap-1 shadow-sm"
@@ -396,21 +404,21 @@ export const CommanderDashboardPage: React.FC = () => {
         </div>
 
         {/* Table Pagination */}
-        {pendingSummary && pendingSummary.total_items > pendingSummary.page_size && (
+        {pendingSummary && effectiveTotalPending > effectivePageSize && (
           <div className="flex items-center justify-between pt-2">
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
-              disabled={page === 1}
+              disabled={page <= 1 || pendingLoading}
               className="px-3 py-1 bg-saathi-bg border border-saathi-border rounded text-xs font-bold disabled:opacity-50"
             >
               Previous
             </button>
             <span className="text-xs text-saathi-textMuted font-mono">
-              Page {page} of {Math.ceil(pendingSummary.total_items / pendingSummary.page_size)}
+              Page {page} of {totalPages}
             </span>
             <button
-              onClick={() => setPage((p) => p + 1)}
-              disabled={page >= Math.ceil(pendingSummary.total_items / pendingSummary.page_size)}
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              disabled={page >= totalPages || pendingLoading}
               className="px-3 py-1 bg-saathi-bg border border-saathi-border rounded text-xs font-bold disabled:opacity-50"
             >
               Next
@@ -423,6 +431,7 @@ export const CommanderDashboardPage: React.FC = () => {
       {selectedPersonnel && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 z-50">
           <div className="bg-white border-2 border-saathi-primary rounded-lg shadow-2xl max-w-lg w-full p-5 sm:p-6 space-y-4 animate-in fade-in zoom-in-95">
+
             <div className="flex items-start justify-between border-b border-saathi-border pb-3">
               <div>
                 <span className="px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-saathi-primarySubtle text-saathi-primary border border-saathi-secondaryLight">
@@ -491,11 +500,11 @@ export const CommanderDashboardPage: React.FC = () => {
               <div className="flex items-center justify-between">
                 <span className="font-bold text-saathi-textDark">Follow-up Status:</span>
                 <span className={`font-mono font-bold px-2 py-0.5 rounded text-[10px] ${
-                  selectedPersonnel.follow_up_status === 'REQUESTED'
+                  isFollowUpRequested(selectedPersonnel.follow_up_status)
                     ? 'bg-saathi-primarySubtle text-saathi-primary border border-saathi-secondaryLight'
                     : 'bg-white text-saathi-textMuted border border-saathi-border'
                 }`}>
-                  {selectedPersonnel.follow_up_status === 'REQUESTED' ? 'FOLLOW-UP REQUESTED' : 'NO ACTION PENDING'}
+                  {isFollowUpRequested(selectedPersonnel.follow_up_status) ? 'FOLLOW-UP REQUESTED' : 'NO ACTION PENDING'}
                 </span>
               </div>
               {selectedPersonnel.last_followup_at && (

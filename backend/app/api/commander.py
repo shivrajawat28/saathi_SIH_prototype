@@ -32,9 +32,13 @@ def get_pending_monthly_checkins(
     request: Request,
     unit: Optional[str] = Query(None, max_length=64, description="Filter by operational unit"),
     status: Optional[str] = Query(None, max_length=32, description="Filter by status ('PENDING', 'OVERDUE', 'FOLLOW_UP_REQUESTED')"),
+    follow_up_status: Optional[str] = Query(None, max_length=32, description="Filter by follow-up status ('NONE', 'REQUESTED', 'FOLLOW_UP_REQUESTED')"),
+    search: Optional[str] = Query(None, max_length=64, description="Search by personnel ID, unit, or role"),
     min_days_overdue: Optional[int] = Query(None, ge=0, le=365, description="Filter by minimum days overdue"),
-    limit: int = Query(50, ge=1, le=100, description="Pagination item limit"),
-    offset: int = Query(0, ge=0, description="Pagination offset"),
+    page: Optional[int] = Query(None, ge=1, description="Page number (1-indexed)"),
+    page_size: Optional[int] = Query(None, ge=1, le=100, description="Pagination page size"),
+    limit: Optional[int] = Query(None, ge=1, le=100, description="Pagination item limit"),
+    offset: Optional[int] = Query(None, ge=0, description="Pagination offset"),
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -42,13 +46,27 @@ def get_pending_monthly_checkins(
     List personnel who have not submitted their expected monthly welfare check-in.
     Provides only administrative metadata needed for operational follow-up. Zero private wellness content.
     """
+    # Calculate effective pagination parameters
+    if page is not None:
+        effective_page_size = page_size or limit or 50
+        effective_limit = effective_page_size
+        effective_offset = (page - 1) * effective_page_size
+        effective_page = page
+    else:
+        effective_limit = limit or page_size or 50
+        effective_offset = offset or 0
+        effective_page = (effective_offset // effective_limit) + 1 if effective_limit > 0 else 1
+
     summary = CommanderService.get_pending_checkins(
         db=db,
         unit_filter=unit,
         status_filter=status,
+        follow_up_status=follow_up_status,
+        search_query=search,
         min_days_overdue=min_days_overdue,
-        limit=limit,
-        offset=offset
+        limit=effective_limit,
+        offset=effective_offset,
+        page=effective_page
     )
 
     AuditService.log_action(
@@ -58,11 +76,12 @@ def get_pending_monthly_checkins(
         role=current_user.roles[0].name if current_user.roles else "COMMANDER",
         action="VIEW_PENDING_CHECKINS",
         target_resource="commander_followup_panel",
-        details={"returned_count": len(summary.items), "total_pending": summary.total_pending},
+        details={"returned_count": len(summary.items), "total_pending": summary.total_pending, "total_filtered": summary.total},
         ip_address=request.client.host if request.client else None
     )
 
     return summary
+
 
 
 @router.get(

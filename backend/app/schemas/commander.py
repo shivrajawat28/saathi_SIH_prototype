@@ -23,13 +23,21 @@ class PendingCheckInItem(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 class PendingCheckInsSummary(BaseModel):
-    total_strength: int = Field(..., ge=0)
-    total_submitted_current_month: int = Field(..., ge=0)
-    total_pending: int = Field(..., ge=0)
-    total_overdue: int = Field(..., ge=0)
-    total_followup_requested: int = Field(..., ge=0)
-    current_checkin_cycle: str
-    items: List[PendingCheckInItem]
+    total_strength: int = Field(..., ge=0, description="Total active personnel count")
+    total_submitted_current_month: int = Field(..., ge=0, description="Count of personnel who submitted this month")
+    total_pending: int = Field(..., ge=0, description="Count of personnel pending check-in this cycle")
+    total_overdue: int = Field(..., ge=0, description="Count of personnel with overdue check-ins")
+    total_followup_requested: int = Field(..., ge=0, description="Count of active follow-up requests")
+    overdue_count: int = Field(0, ge=0, description="Frontend alias for total_overdue")
+    followed_up_count: int = Field(0, ge=0, description="Frontend alias for total_followup_requested")
+    current_checkin_cycle: str = Field(..., description="E.g. September 2026")
+    cycle_label: str = Field("", description="Frontend alias for current_checkin_cycle")
+    cycle_month: str = Field("", description="E.g. 2026-09")
+    total: int = Field(..., ge=0, description="Total filtered pending items")
+    total_items: int = Field(..., ge=0, description="Frontend alias for total filtered pending items")
+    page: int = Field(1, ge=1, description="Active 1-indexed page")
+    page_size: int = Field(50, ge=1, description="Page size limit")
+    items: List[PendingCheckInItem] = Field(default_factory=list)
 
 class CheckInFollowUpRequest(BaseModel):
     notes: Optional[str] = Field(None, max_length=256, description="Optional administrative reminder note")
@@ -41,4 +49,6 @@ class CheckInFollowUpResponse(BaseModel):
     personnel_id: str
     target_month: str
     requested_at: datetime
+    requested_by_username: Optional[str] = None
     follow_up_status: str
+
