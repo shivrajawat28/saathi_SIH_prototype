@@ -34,7 +34,7 @@ services:
         fromService:
           type: web
           name: saathi-backend
-          property: host
+          envVarKey: RENDER_EXTERNAL_HOSTNAME
 
 databases:
   # SAATHI PostgreSQL Managed Database
