@@ -17,7 +17,7 @@ services:
       - key: SECRET_KEY
         generateValue: true
       - key: BACKEND_CORS_ORIGINS
-        value: "*"
+        value: '["*"]'
 
   # SAATHI Frontend React Static Site
   - type: web

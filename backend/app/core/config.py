@@ -30,7 +30,7 @@ class Settings(BaseSettings):
     METADATA_PATH: str = str(BASE_DIR / "ml/models/model_metadata.json")
 
     # CORS
-    BACKEND_CORS_ORIGINS: List[str] = [
+    BACKEND_CORS_ORIGINS: Union[List[str], str] = [
         "http://localhost:3000",
         "http://localhost:5173",
         "http://localhost:8000",
