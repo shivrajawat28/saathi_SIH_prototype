@@ -1,19 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Shield, Lock, User, AlertCircle, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Shield, Lock, User, AlertCircle, ArrowRight, CheckCircle2, RefreshCw } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { getApiErrorMessage } from '../api/client';
 
 export const LoginPage: React.FC = () => {
   const [username, setUsername] = useState<string>('welfare_officer');
   const [password, setPassword] = useState<string>('welfare123');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [loadingText, setLoadingText] = useState<string>('Authenticating Role...');
 
   const { login } = useAuth();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
+    if (loading) {
+      setLoadingText('Authenticating Role...');
+      timer = setTimeout(() => {
+        setLoadingText('Connecting to SAATHI service (waking backend)...');
+      }, 3500);
+    }
+    return () => clearTimeout(timer);
+  }, [loading]);
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return; // Prevent duplicate concurrent requests
     setError(null);
     setLoading(true);
     try {
@@ -31,7 +45,7 @@ export const LoginPage: React.FC = () => {
       }
     } catch (err: any) {
       console.error('Login failure:', err);
-      setError(err.response?.data?.detail || 'Authentication failed. Please check credentials.');
+      setError(getApiErrorMessage(err, 'Authentication failed. Please check credentials.'));
     } finally {
       setLoading(false);
     }
@@ -125,10 +139,13 @@ export const LoginPage: React.FC = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex items-center justify-center gap-2 bg-saathi-saffron hover:bg-saathi-saffronHover text-white font-bold py-2.5 px-4 rounded text-xs transition-colors shadow-sm disabled:opacity-50 cursor-pointer uppercase tracking-wider"
+                className="w-full flex items-center justify-center gap-2 bg-saathi-saffron hover:bg-saathi-saffronHover text-white font-bold py-2.5 px-4 rounded text-xs transition-colors shadow-sm disabled:opacity-75 cursor-pointer uppercase tracking-wider"
               >
                 {loading ? (
-                  <span>Authenticating Role...</span>
+                  <span className="flex items-center gap-2">
+                    <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                    <span>{loadingText}</span>
+                  </span>
                 ) : (
                   <>
                     <span>Sign In to SAATHI Portal</span>

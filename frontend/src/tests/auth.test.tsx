@@ -59,4 +59,28 @@ describe('Frontend Authentication Flow', () => {
     expect(screen.getByText(/AI-Based Personnel Welfare Support & Monitoring Decision System/i)).toBeInTheDocument();
     expect(screen.getByText(/Decision Support Aid. AI suggests; authorized humans decide/i)).toBeInTheDocument();
   });
+
+  it('correctly distinguishes 401 vs network/server wake-up errors', async () => {
+    const { getApiErrorMessage } = await import('../api/client');
+
+    // 401 Unauthorized
+    const err401 = { response: { status: 401 } };
+    expect(getApiErrorMessage(err401)).toBe('Invalid username or password.');
+
+    // 502 Bad Gateway (Server Waking Up on Render)
+    const err502 = { response: { status: 502 } };
+    expect(getApiErrorMessage(err502)).toBe('SAATHI service is temporarily unavailable (waking up). Please try again.');
+
+    // 503 Service Unavailable
+    const err503 = { response: { status: 503 } };
+    expect(getApiErrorMessage(err503)).toBe('SAATHI service is temporarily unavailable (waking up). Please try again.');
+
+    // Timeout Error
+    const errTimeout = { code: 'ECONNABORTED', message: 'timeout of 60000ms exceeded' };
+    expect(getApiErrorMessage(errTimeout)).toBe('The service is waking up. Please retry in a moment.');
+
+    // Network Disconnect
+    const errNetwork = { code: 'ERR_NETWORK', message: 'Network Error' };
+    expect(getApiErrorMessage(errNetwork)).toBe('Unable to reach the SAATHI service. Please check your connection.');
+  });
 });

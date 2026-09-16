@@ -11,8 +11,52 @@ export const apiClient = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 15000,
+  timeout: 60000,
 });
+
+// Classify API errors accurately to distinguish credentials vs network/wake-up issues
+export function getApiErrorMessage(err: any, defaultMsg = 'Authentication failed. Please check credentials.'): string {
+  if (!err) return defaultMsg;
+
+  // 1. Explicit backend validation/rejection detail
+  if (err.response?.data?.detail) {
+    const detail = err.response.data.detail;
+    if (typeof detail === 'string') {
+      return detail;
+    }
+    if (Array.isArray(detail) && detail.length > 0) {
+      return detail.map((d: any) => d.msg || d.message || JSON.stringify(d)).join(', ');
+    }
+  }
+
+  // 2. HTTP status code specific messages
+  const status = err.response?.status;
+  if (status === 401) {
+    return 'Invalid username or password.';
+  }
+  if (status === 403) {
+    return 'User account is deactivated or unauthorized.';
+  }
+  if (status === 429) {
+    return 'Too many attempts. Please wait a moment before trying again.';
+  }
+  if (status === 502 || status === 503 || status === 504) {
+    return 'SAATHI service is temporarily unavailable (waking up). Please try again.';
+  }
+  if (status && status >= 500) {
+    return 'SAATHI service is temporarily unavailable. Please try again.';
+  }
+
+  // 3. Timeout and network connectivity
+  if (err.code === 'ECONNABORTED' || err.message?.toLowerCase().includes('timeout')) {
+    return 'The service is waking up. Please retry in a moment.';
+  }
+  if (err.message === 'Network Error' || err.code === 'ERR_NETWORK' || !err.response) {
+    return 'Unable to reach the SAATHI service. Please check your connection.';
+  }
+
+  return err.message || defaultMsg;
+}
 
 // Attach JWT Bearer Token to outgoing requests
 apiClient.interceptors.request.use((config) => {

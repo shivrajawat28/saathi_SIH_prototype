@@ -82,4 +82,30 @@ def test_demo_roles_authentication_matrix(client: TestClient):
         assert data["user"]["role"] == expected_role
         assert "access_token" in data
 
+def test_consecutive_logins_stability(client: TestClient):
+    """
+    Verify repeated consecutive logins for demo roles succeed reliably without connection dropping.
+    """
+    for _ in range(5):
+        resp = client.post(
+            "/api/v1/auth/login",
+            json={"username": "welfare_user", "password": "password123"}
+        )
+        assert resp.status_code == 200
+        assert "access_token" in resp.json()
+
+def test_session_engine_configuration():
+    """
+    Verify engine pool options and session creation are configured cleanly.
+    """
+    from backend.app.db.session import engine, SessionLocal
+    assert engine is not None
+    db = SessionLocal()
+    try:
+        assert db.is_active
+    finally:
+        db.close()
+
+
+
 
