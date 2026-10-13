@@ -10,6 +10,24 @@ from typing import List, Union
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import AnyHttpUrl, field_validator
 
+def normalize_database_url(v: str) -> str:
+    """
+    Normalizes database connection strings for SQLAlchemy 2.x.
+    Explicitly maps PostgreSQL schemes (postgresql://, postgres://, postgresql+psycopg://)
+    to postgresql+psycopg2:// to use the installed psycopg2-binary driver and prevent
+    ModuleNotFoundError: No module named 'psycopg' (Psycopg 3).
+    Preserves SQLite and other explicit schemes.
+    """
+    if isinstance(v, str):
+        v = v.strip()
+        if v.startswith("postgresql+psycopg://"):
+            return v.replace("postgresql+psycopg://", "postgresql+psycopg2://", 1)
+        elif v.startswith("postgres://"):
+            return v.replace("postgres://", "postgresql+psycopg2://", 1)
+        elif v.startswith("postgresql://"):
+            return v.replace("postgresql://", "postgresql+psycopg2://", 1)
+    return v
+
 class Settings(BaseSettings):
     PROJECT_NAME: str = "SAATHI AI Welfare Decision Support System"
     VERSION: str = "1.0.0"
@@ -46,10 +64,8 @@ class Settings(BaseSettings):
 
     @field_validator("DATABASE_URL", mode="before")
     @classmethod
-    def normalize_database_url(cls, v: str) -> str:
-        if isinstance(v, str) and v.startswith("postgres://"):
-            return v.replace("postgres://", "postgresql://", 1)
-        return v
+    def validate_database_url(cls, v: str) -> str:
+        return normalize_database_url(v)
 
     @field_validator("BACKEND_CORS_ORIGINS", mode="before")
     @classmethod

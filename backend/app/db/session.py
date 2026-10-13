@@ -4,7 +4,9 @@ SAATHI Database Session & Engine Configuration (SQLAlchemy 2.x)
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker, Session
-from backend.app.core.config import settings
+from backend.app.core.config import settings, normalize_database_url
+
+db_url = normalize_database_url(settings.DATABASE_URL)
 
 # Handle SQLite vs PostgreSQL arguments
 connect_args = {}
@@ -12,9 +14,11 @@ engine_kwargs = {
     "pool_pre_ping": True,
 }
 
-if settings.DATABASE_URL.startswith("sqlite"):
+if db_url.startswith("sqlite"):
     connect_args = {"check_same_thread": False}
 else:
+    if "supabase" in db_url and "sslmode" not in db_url:
+        connect_args["sslmode"] = "require"
     engine_kwargs.update({
         "pool_recycle": 300,
         "pool_size": 10,
@@ -22,7 +26,7 @@ else:
     })
 
 engine = create_engine(
-    settings.DATABASE_URL,
+    db_url,
     connect_args=connect_args,
     **engine_kwargs
 )
